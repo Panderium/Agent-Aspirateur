@@ -8,22 +8,25 @@ namespace TP1_IA.model
 {
     class Coordonnees
     {
-        private int x;
-        private int y;
+        private int _x;
+        private int _y;
 
         public Coordonnees(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
 
-        public int getX()
+        public int X
         {
-            return x;
+            get { return _x; }
+            set { _x = value; }
         }
-        public int getY()
+
+        public int Y
         {
-            return y;
+            get { return _y; }
+            set { _y = value; }
         }
     }
 }

@@ -8,32 +8,32 @@ namespace TP1_IA.model
 {
     class Agent
     {
-        private Coordonnees coordonnees;
-        private Environnement environnement;
-        private int score;
-        private Connaissances connaissances;
-        private Desire desire;
-        private Intentions intentions;
-        private Capteurs capteurs;
+        private Coordonnees _coordonnees;
+        private Environnement _environnement;
+        private int _score;
+        private Connaissances _connaissances;
+        private Desire _desire;
+        private Intentions _intentions;
+        private Capteurs _capteurs;
 
         public Agent() : this(new Coordonnees(0,0), new Environnement()) { }
 
         public Agent(Coordonnees c, Environnement e)
         {
-            coordonnees = c;
-            environnement = e;
-            score = 0;
-            connaissances = new Connaissances();
-            desire = new Desire();
-            intentions = new Intentions();
-            capteurs = new Capteurs();
+            _coordonnees = c;
+            _environnement = e;
+            _score = 0;
+            _connaissances = new Connaissances();
+            _desire = new Desire();
+            _intentions = new Intentions();
+            _capteurs = new Capteurs();
         }
 
         public int distance(Coordonnees a, Coordonnees b)
         {
             int distance = 0;
-            distance += Math.Abs(a.getX() - b.getX());
-            distance += Math.Abs(a.getY() - b.getY());
+            distance += Math.Abs(a.X - b.X);
+            distance += Math.Abs(a.Y - b.Y);
             return distance;
         }
 
