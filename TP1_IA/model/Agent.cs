@@ -57,6 +57,36 @@ namespace TP1_IA.model
             return plusProche;
         }
 
+        public void fillIntention(Coordonnees c, Enum.EnumAction type)
+        {
+*            while(distance(_coordonnees, c) > 0){
+                if (c.X > this._coordonnees.X)
+                    _intentions.empile(Enum.EnumAction.droite);
+                else
+                {
+                    if (c.X < this._coordonnees.X)
+                        _intentions.empile(Enum.EnumAction.gauche);
+                }
+
+                if (c.Y > this._coordonnees.Y)
+                    _intentions.empile(Enum.EnumAction.haut);
+                else
+                {
+                    if (c.Y < this._coordonnees.Y)
+                        _intentions.empile(Enum.EnumAction.bas);
+                }
+                if(c.X.Equals(this._coordonnees.X) && c.Y.Equals(this._coordonnees.Y))
+                {
+                    _intentions.empile(type);
+                }
+            }
+        }
+
+        public Enum.EnumAction move()
+        {
+            return _intentions.depile();
+        }
+
         public void moveAndActToOptimum()
         {
             
@@ -66,15 +96,27 @@ namespace TP1_IA.model
             // donne les mouvements et l'actions à faire grâce aux énums sous forme de pile dans Intention.
 
             // quel mouvement est le plus rentable
-            Coordonnees objectif = null;
+            Coordonnees objectifCoordonnee = null;
+            Enum.EnumAction objectifType;
             if (-(distance(_coordonnees, lePlusProche(_connaissances.Bijoux))) + _valeur["bijou"] <
                     -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
-                objectif = lePlusProche(_connaissances.Bijoux);
+            {
+                objectifCoordonnee = lePlusProche(_connaissances.Bijoux);
+                objectifType = Enum.EnumAction.recuperer;
+            }
             else
-                objectif = lePlusProche(_connaissances.Poussieres);
+            {
+                objectifCoordonnee = lePlusProche(_connaissances.Poussieres);
+                objectifType = Enum.EnumAction.aspirer;
+            }
+            fillIntention(objectifCoordonnee, objectifType);
 
             // move vers ce mouvement.
+            while(_intentions.size() != 0)
+            {
+                Enum.EnumAction action = move();
+            }
 
         }
-    }
+        }
 }
