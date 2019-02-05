@@ -44,6 +44,16 @@ namespace TP1_IA.model
 
         }
 
+        public Enum.EnumChambre getRoom(Coordonnees c)
+        {
+            return chambres[c.X, c.Y];
+        }
+
+        public void setRoom(Coordonnees c, Enum.EnumChambre ec)
+        {
+            chambres[c.X, c.Y] = ec;
+        }
+
         public void cleaningRoom(Coordonnees c)
         {
             chambres[c.X, c.Y] = Enum.EnumChambre.vide;
