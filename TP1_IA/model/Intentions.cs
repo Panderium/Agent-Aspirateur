@@ -9,13 +9,13 @@ namespace TP1_IA.model
     // liste des mouvements et des actions à effectuer pour atteindre le prochain but
     class Intentions
     {
-        private Stack<Enum.EnumAction> _intentions = new Stack<Enum.EnumAction>();
+        private Stack<Enum.Action> _intentions = new Stack<Enum.Action>();
 
-        public void empile(Enum.EnumAction ea)
+        public void empile(Enum.Action ea)
         {
             _intentions.Push(ea);
         }
-        public Enum.EnumAction depile()
+        public Enum.Action depile()
         {
             return _intentions.Pop();
         }

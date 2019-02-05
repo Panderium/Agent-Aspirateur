@@ -8,13 +8,15 @@ namespace TP1_IA.model
 {
     class Environnement
     {
-        private Enum.EnumChambre[ , ] chambres = new Enum.EnumChambre[10,10];
+        private Enum.Chambre[ , ] chambres = new Enum.Chambre[10,10];
+        private static Environnement instance=null;
+
 
         void Environment()
         {
             for (int x = 0; x < 10; x++)
                 for (int y = 0; y < 10; y++)
-                    chambres[x, y] = Enum.EnumChambre.vide;
+                    chambres[x, y] = Enum.Chambre.vide;
         }
 
         public void generateStuff()
@@ -26,37 +28,49 @@ namespace TP1_IA.model
 
             if (typeStuff < 2)
             {
-                if (chambres[X, Y] == Enum.EnumChambre.poussiere)
-                    chambres[X, Y] = Enum.EnumChambre.poussiereEtBijou;
+                if (chambres[X, Y] == Enum.Chambre.poussiere)
+                    chambres[X, Y] = Enum.Chambre.poussiereEtBijou;
 
-                if (chambres[X, Y] == Enum.EnumChambre.vide)
-                    chambres[X, Y] = Enum.EnumChambre.bijou;
+                if (chambres[X, Y] == Enum.Chambre.vide)
+                    chambres[X, Y] = Enum.Chambre.bijou;
                 
             }
             else
             {
-                if (chambres[X, Y] == Enum.EnumChambre.bijou)
-                    chambres[X, Y] = Enum.EnumChambre.poussiereEtBijou;
+                if (chambres[X, Y] == Enum.Chambre.bijou)
+                    chambres[X, Y] = Enum.Chambre.poussiereEtBijou;
 
-                if (chambres[X, Y] == Enum.EnumChambre.vide)
-                    chambres[X, Y] = Enum.EnumChambre.poussiere;
+                if (chambres[X, Y] == Enum.Chambre.vide)
+                    chambres[X, Y] = Enum.Chambre.poussiere;
             }
 
         }
 
-        public Enum.EnumChambre getRoom(Coordonnees c)
+        public Enum.Chambre getRoom(Coordonnees c)
         {
             return chambres[c.X, c.Y];
         }
 
-        public void setRoom(Coordonnees c, Enum.EnumChambre ec)
+        public void setRoom(Coordonnees c, Enum.Chambre ec)
         {
             chambres[c.X, c.Y] = ec;
         }
 
         public void cleaningRoom(Coordonnees c)
         {
-            chambres[c.X, c.Y] = Enum.EnumChambre.vide;
+            chambres[c.X, c.Y] = Enum.Chambre.vide;
+        }
+
+        public static Environnement Instance
+        {
+            get
+            {
+                if (instance==null)
+                {
+                    instance = new Environnement();
+                }
+                return instance;
+            }
         }
     }
 }

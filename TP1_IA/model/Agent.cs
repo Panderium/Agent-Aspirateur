@@ -1,8 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TP1_IA.strategy;
 
 namespace TP1_IA.model
 {
@@ -17,10 +15,11 @@ namespace TP1_IA.model
         private Capteurs _capteurs;
         private Effecteurs _effecteur;
         private Dictionary<String, int> _valeur;
+        private SearchStrategy _strategy;
 
-        public Agent() : this(new Coordonnees(0,0), new Environnement()) { }
+        public Agent() : this(new Coordonnees(0,0), new Environnement(), new InformedSearch()) { }
 
-        public Agent(Coordonnees c, Environnement e)
+        public Agent(Coordonnees c, Environnement e, SearchStrategy strategy)
         {
             _coordonnees = c;
             _environnement = e;
@@ -34,6 +33,12 @@ namespace TP1_IA.model
             _valeur.Add("deplacement", -1);
             _valeur.Add("poussiere", 10);
             _valeur.Add("bijou", 15);
+            _strategy = strategy;
+        }
+
+        private void changeStrategy(SearchStrategy strategy)
+        {
+            _strategy = strategy;
         }
 
         public int distance(Coordonnees a, Coordonnees b)
@@ -59,23 +64,23 @@ namespace TP1_IA.model
             return plusProche;
         }
 
-        public void fillIntention(Coordonnees c, Enum.EnumAction type)
+        public void fillIntention(Coordonnees c, Enum.Action type)
         {
             while(distance(_coordonnees, c) > 0){
                 if (c.X > this._coordonnees.X)
-                    _intentions.empile(Enum.EnumAction.droite);
+                    _intentions.empile(Enum.Action.droite);
                 else
                 {
                     if (c.X < this._coordonnees.X)
-                        _intentions.empile(Enum.EnumAction.gauche);
+                        _intentions.empile(Enum.Action.gauche);
                 }
 
                 if (c.Y > this._coordonnees.Y)
-                    _intentions.empile(Enum.EnumAction.haut);
+                    _intentions.empile(Enum.Action.haut);
                 else
                 {
                     if (c.Y < this._coordonnees.Y)
-                        _intentions.empile(Enum.EnumAction.bas);
+                        _intentions.empile(Enum.Action.bas);
                 }
                 if(c.X.Equals(this._coordonnees.X) && c.Y.Equals(this._coordonnees.Y))
                 {
@@ -84,7 +89,7 @@ namespace TP1_IA.model
             }
         }
 
-        public Enum.EnumAction move()
+        public Enum.Action move()
         {
             return _intentions.depile();
         }
@@ -99,17 +104,17 @@ namespace TP1_IA.model
 
             // quel mouvement est le plus rentable
             Coordonnees objectifCoordonnee = null;
-            Enum.EnumAction objectifType;
+            Enum.Action objectifType;
             if (-(distance(_coordonnees, lePlusProche(_connaissances.Bijoux))) + _valeur["bijou"] <
-                    -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
+                -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
             {
                 objectifCoordonnee = lePlusProche(_connaissances.Bijoux);
-                objectifType = Enum.EnumAction.recuperer;
+                objectifType = Enum.Action.recuperer;
             }
             else
             {
                 objectifCoordonnee = lePlusProche(_connaissances.Poussieres);
-                objectifType = Enum.EnumAction.aspirer;
+                objectifType = Enum.Action.aspirer;
             }
 
             fillIntention(objectifCoordonnee, objectifType);
@@ -117,10 +122,10 @@ namespace TP1_IA.model
             // move vers ce mouvement.
             while(_intentions.size() != 0)
             {
-                Enum.EnumAction action = move();
+                Enum.Action action = move();
                 _effecteur.act(action, _environnement, _coordonnees);
             }
 
         }
-        }
+    }
 }
