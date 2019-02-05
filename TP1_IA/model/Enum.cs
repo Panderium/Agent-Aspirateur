@@ -8,11 +8,11 @@ namespace TP1_IA.model
 {
     class Enum
     {
-        public enum EnumAction
+        public enum Action
         {
             haut, bas, droite, gauche, aspirer, recuperer,
         };
-        public enum EnumChambre
+        public enum Chambre
         {
             vide, poussiere, bijou, poussiereEtBijou,
         };

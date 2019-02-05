@@ -9,13 +9,13 @@ namespace TP1_IA.model
     class Effecteurs
     {
 
-        public void act(Enum.EnumAction ea, Environnement e, Coordonnees c)
+        public void act(Enum.Action ea, Environnement e, Coordonnees c)
         {
-            if (ea.Equals(Enum.EnumAction.aspirer))
+            if (ea.Equals(Enum.Action.aspirer))
             {
                 aspire(e, c);
             }
-            if (ea.Equals(Enum.EnumAction.recuperer))
+            if (ea.Equals(Enum.Action.recuperer))
             {
                 ramasse(e, c);
             }
@@ -27,15 +27,15 @@ namespace TP1_IA.model
 
         private void aspire(Environnement e, Coordonnees c)
         {
-            Enum.EnumChambre ec = e.getRoom(c);
-            if (ec.Equals(Enum.EnumChambre.poussiere))
+            Enum.Chambre ec = e.getRoom(c);
+            if (ec.Equals(Enum.Chambre.poussiere))
             {
-                e.setRoom(c, Enum.EnumChambre.vide);
+                e.setRoom(c, Enum.Chambre.vide);
                 // OK + gestion du score
             }
-            if(ec.Equals(Enum.EnumChambre.poussiereEtBijou) || ec.Equals(Enum.EnumChambre.bijou))
+            if(ec.Equals(Enum.Chambre.poussiereEtBijou) || ec.Equals(Enum.Chambre.bijou))
             {
-                e.setRoom(c, Enum.EnumChambre.vide);
+                e.setRoom(c, Enum.Chambre.vide);
                 // KO + gestion du score
             }
             else
@@ -44,15 +44,15 @@ namespace TP1_IA.model
         }
         private void ramasse(Environnement e, Coordonnees c)
         {
-            Enum.EnumChambre ec = e.getRoom(c);
-            if (ec.Equals(Enum.EnumChambre.poussiereEtBijou) || ec.Equals(Enum.EnumChambre.bijou))
+            Enum.Chambre ec = e.getRoom(c);
+            if (ec.Equals(Enum.Chambre.poussiereEtBijou) || ec.Equals(Enum.Chambre.bijou))
             {
-                e.setRoom(c, Enum.EnumChambre.vide);
+                e.setRoom(c, Enum.Chambre.vide);
                 // OK
             }
-            if (ec.Equals(Enum.EnumChambre.poussiere))
+            if (ec.Equals(Enum.Chambre.poussiere))
             {
-                e.setRoom(c, Enum.EnumChambre.vide);
+                e.setRoom(c, Enum.Chambre.vide);
                 // KO
             }
             else
@@ -61,17 +61,17 @@ namespace TP1_IA.model
             }
 
         }
-        private Coordonnees bouger(Enum.EnumAction ea, Coordonnees actualCoord)
+        private Coordonnees bouger(Enum.Action ea, Coordonnees actualCoord)
         {
             switch (ea)
             {
-                case Enum.EnumAction.gauche:
+                case Enum.Action.gauche:
                     return new Coordonnees(actualCoord.X - 1, actualCoord.Y);
-                case Enum.EnumAction.droite:
+                case Enum.Action.droite:
                     return new Coordonnees(actualCoord.X + 1, actualCoord.Y);
-                case Enum.EnumAction.bas:
+                case Enum.Action.bas:
                     return new Coordonnees(actualCoord.X, actualCoord.Y + 1);
-                case Enum.EnumAction.haut:
+                case Enum.Action.haut:
                     return new Coordonnees(actualCoord.X, actualCoord.Y - 1);
                 default:
                     return actualCoord;

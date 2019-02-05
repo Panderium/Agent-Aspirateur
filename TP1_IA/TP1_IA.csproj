@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controlleur\Main.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +58,7 @@
     <Compile Include="model\Coordonnees.cs" />
     <Compile Include="model\Connaissances.cs" />
     <Compile Include="model\Desire.cs" />
+    <Compile Include="model\Effecteurs.cs" />
     <Compile Include="model\Enum.cs" />
     <Compile Include="model\Environnement.cs" />
     <Compile Include="model\Intentions.cs" />
