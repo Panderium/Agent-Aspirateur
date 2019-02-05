@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP1_IA.model
 {
-    class Connaissances : Contenu
+    public class Connaissances : Contenu
     {
     }
 }

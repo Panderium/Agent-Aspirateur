@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP1_IA.model
 {
-    class Coordonnees
+    public class Coordonnees
     {
         private int _x;
         private int _y;
@@ -15,6 +15,27 @@ namespace TP1_IA.model
         {
             X = x;
             Y = y;
+        }
+
+        public Coordonnees move( Enum.Action a)
+        {
+            switch (a)
+            {
+                case Enum.Action.bas:
+                    Y--;
+                    break;
+                case Enum.Action.haut:
+                    Y++;
+                    break;
+                case Enum.Action.gauche:
+                    X--;
+                    break;
+                case Enum.Action.droite:
+                    X++;
+                    break;
+            }
+
+            return this;
         }
 
         public int X

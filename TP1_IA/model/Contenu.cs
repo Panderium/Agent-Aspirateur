@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP1_IA.model
 {
-    abstract class Contenu
+    public abstract class Contenu
     {
         private List<Coordonnees> _bijoux;
         private List<Coordonnees> _poussieres;

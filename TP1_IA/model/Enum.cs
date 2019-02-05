@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP1_IA.model
 {
-    class Enum
+    public class Enum
     {
         public enum Action
         {
