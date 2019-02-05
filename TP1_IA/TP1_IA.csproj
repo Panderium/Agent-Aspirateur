@@ -57,11 +57,15 @@
     <Compile Include="model\Coordonnees.cs" />
     <Compile Include="model\Connaissances.cs" />
     <Compile Include="model\Desire.cs" />
+    <Compile Include="model\Effecteurs.cs" />
     <Compile Include="model\Enum.cs" />
     <Compile Include="model\Environnement.cs" />
     <Compile Include="model\Intentions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="strategy\InformedSearch.cs" />
+    <Compile Include="strategy\SearchStrategy.cs" />
+    <Compile Include="strategy\UninformedSearch.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

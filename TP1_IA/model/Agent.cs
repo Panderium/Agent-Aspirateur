@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TP1_IA.strategy;
 
 namespace TP1_IA.model
 {
@@ -17,10 +15,11 @@ namespace TP1_IA.model
         private Capteurs _capteurs;
         private Effecteurs _effecteur;
         private Dictionary<String, int> _valeur;
+        private SearchStrategy _strategy;
 
-        public Agent() : this(new Coordonnees(0,0), new Environnement()) { }
+        public Agent() : this(new Coordonnees(0,0), new Environnement(), new InformedSearch()) { }
 
-        public Agent(Coordonnees c, Environnement e)
+        public Agent(Coordonnees c, Environnement e, SearchStrategy strategy)
         {
             _coordonnees = c;
             _environnement = e;
@@ -34,6 +33,12 @@ namespace TP1_IA.model
             _valeur.Add("deplacement", -1);
             _valeur.Add("poussiere", 10);
             _valeur.Add("bijou", 15);
+            _strategy = strategy;
+        }
+
+        private void changeStrategy(SearchStrategy strategy)
+        {
+            _strategy = strategy;
         }
 
         public int distance(Coordonnees a, Coordonnees b)
@@ -101,7 +106,7 @@ namespace TP1_IA.model
             Coordonnees objectifCoordonnee = null;
             Enum.EnumAction objectifType;
             if (-(distance(_coordonnees, lePlusProche(_connaissances.Bijoux))) + _valeur["bijou"] <
-                    -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
+                -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
             {
                 objectifCoordonnee = lePlusProche(_connaissances.Bijoux);
                 objectifType = Enum.EnumAction.recuperer;
@@ -122,5 +127,5 @@ namespace TP1_IA.model
             }
 
         }
-        }
+    }
 }
