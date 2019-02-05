@@ -1,0 +1,8 @@
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttribute.cs
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/obj/Debug/TP1_IA.Form1.resources
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/obj/Debug/TP1_IA.Properties.Resources.resources
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/bin/Debug/TP1_IA.exe.config
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/bin/Debug/TP1_IA.exe.mdb
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/bin/Debug/TP1_IA.exe
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/obj/Debug/TP1_IA.exe
+/home/panderium/Documents/UQAC/IA/tp1-ia/TP1_IA/obj/Debug/TP1_IA.exe.mdb
