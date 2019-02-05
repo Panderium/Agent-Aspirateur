@@ -10,7 +10,7 @@ namespace TP1_IA.model
     {
         public enum EnumAction
         {
-            haut, bas, droite, gauche, aspirer, recuperer, aspirerEtRecuperer,
+            haut, bas, droite, gauche, aspirer, recuperer,
         };
         public enum EnumChambre
         {

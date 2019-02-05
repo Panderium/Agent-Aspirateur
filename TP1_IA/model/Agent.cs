@@ -15,6 +15,7 @@ namespace TP1_IA.model
         private Desire _desire;
         private Intentions _intentions;
         private Capteurs _capteurs;
+        private Effecteurs _effecteur;
         private Dictionary<String, int> _valeur;
 
         public Agent() : this(new Coordonnees(0,0), new Environnement()) { }
@@ -28,6 +29,7 @@ namespace TP1_IA.model
             _desire = new Desire();
             _intentions = new Intentions();
             _capteurs = new Capteurs();
+            _effecteur = new Effecteurs();
             _valeur = new Dictionary<string, int>();
             _valeur.Add("deplacement", -1);
             _valeur.Add("poussiere", 10);
@@ -59,7 +61,7 @@ namespace TP1_IA.model
 
         public void fillIntention(Coordonnees c, Enum.EnumAction type)
         {
-*            while(distance(_coordonnees, c) > 0){
+            while(distance(_coordonnees, c) > 0){
                 if (c.X > this._coordonnees.X)
                     _intentions.empile(Enum.EnumAction.droite);
                 else
@@ -109,12 +111,14 @@ namespace TP1_IA.model
                 objectifCoordonnee = lePlusProche(_connaissances.Poussieres);
                 objectifType = Enum.EnumAction.aspirer;
             }
+
             fillIntention(objectifCoordonnee, objectifType);
 
             // move vers ce mouvement.
             while(_intentions.size() != 0)
             {
                 Enum.EnumAction action = move();
+                _effecteur.act(action, _environnement, _coordonnees);
             }
 
         }
