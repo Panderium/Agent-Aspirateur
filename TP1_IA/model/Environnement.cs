@@ -5,7 +5,15 @@ namespace TP1_IA.model
     class Environnement
     {
         private EnumIA.Chambre[ , ] chambres = new EnumIA.Chambre[10,10];
-        private static Environnement instance;
+        Random rnd = new Random();
+
+        public EnumIA.Chambre[,] Chambres
+        {
+            get => chambres;
+            set => chambres = value;
+        }
+
+        private static Environnement instance=null;
 
 
         void Environment()
@@ -13,33 +21,44 @@ namespace TP1_IA.model
             for (int x = 0; x < 10; x++)
                 for (int y = 0; y < 10; y++)
                     chambres[x, y] = EnumIA.Chambre.vide;
+
         }
 
         public void generateStuff()
         {
-            Random rnd = new Random();
-            int X = rnd.Next(0, 10); // creates a number between 0 and 9
-            int Y = rnd.Next(0, 10);
-            int typeStuff = rnd.Next(0, 10);
-
-            if (typeStuff < 2)
+            while (true)
             {
-                if (chambres[X, Y] == EnumIA.Chambre.poussiere)
-                    chambres[X, Y] = EnumIA.Chambre.poussiereEtBijou;
 
-                if (chambres[X, Y] == EnumIA.Chambre.vide)
-                    chambres[X, Y] = EnumIA.Chambre.bijou;
+                int X = rnd.Next(0, 10); // creates a number between 0 and 9
+                int Y = rnd.Next(0, 10);
+
+                int typeStuff = rnd.Next(0, 10);
+                Console.WriteLine(X);
+                Console.WriteLine(Y);
+                Console.WriteLine(typeStuff);
+                if (typeStuff < 2)
+                {
+                    if (chambres[X, Y] == EnumIA.Chambre.poussiere)
+                        chambres[X, Y] = EnumIA.Chambre.poussiereEtBijou;
+
+                    if (chambres[X, Y] == EnumIA.Chambre.vide)
+                        chambres[X, Y] = EnumIA.Chambre.bijou;
+
+                }
+                else
+                {
+                    if (chambres[X, Y] == EnumIA.Chambre.bijou)
+                        chambres[X, Y] = EnumIA.Chambre.poussiereEtBijou;
+
+
+                    if (chambres[X, Y] == EnumIA.Chambre.vide)
+                        chambres[X, Y] = EnumIA.Chambre.poussiere;
+                }
+
+                Program.updateUI();
+                System.Threading.Thread.Sleep(1000);
                 
             }
-            else
-            {
-                if (chambres[X, Y] == EnumIA.Chambre.bijou)
-                    chambres[X, Y] = EnumIA.Chambre.poussiereEtBijou;
-
-                if (chambres[X, Y] == EnumIA.Chambre.vide)
-                    chambres[X, Y] = EnumIA.Chambre.poussiere;
-            }
-
         }
 
         public EnumIA.Chambre getRoom(Coordonnees c)

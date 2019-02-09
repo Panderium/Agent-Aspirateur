@@ -8,27 +8,41 @@ namespace TP1_IA
 {
     static class Program
     {
-        
-        static Environnement env = Environnement.Instance;
-        static Thread t = new Thread(env.generateStuff);
+        private static Environnement env = null;
+        private static Thread t = null;
+        private static Thread t2 = null;
+        private static Form1 form = null;
+
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
         static void Main()
-        {
-        Arbre a = new Arbre();
-        a.build(new Coordonnees(5, 5),new Connaissances());
-        Console.WriteLine(a);
+        {                
+            form = new Form1();
 
-
-
-        
+            env = Environnement.Instance;
+            t = new Thread(env.generateStuff);
+            t.Start();
+            
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-       
+            Application.Run(form);
+                     
+            
+            
+            
+            
+            
+        }
 
+        public static void updateUI()
+        {
+            
+                form.updateUI();
+           
         }
     }
+    
 }
