@@ -1,96 +1,47 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Forms;
 using TP1_IA.model;
-using Enum = TP1_IA.model.Enum;
 
 namespace TP1_IA.strategy
 {
     public class Arbre
     {
-        private static int _max_dept=8;
-        private Arbre _parent = null;
-        private ArrayList _enfant = new ArrayList();
-        private int _profondeur = 0;
-        private int _score = 0;
-        private Coordonnees _position = null;
+        private int _maxDepth;
+        private Connaissances _connaissances;
+        private Node _root;
 
-        public Arbre build(Coordonnees pos,Connaissances c)
+        public Arbre(int maxDepth, Connaissances connaissances)
         {
-            
-            if (this.Profondeur > _max_dept)
+            _maxDepth = maxDepth;
+            _connaissances = connaissances;
+            _root = new Node(connaissances);
+
+            build(_root, 0);
+        }
+
+        public Node build(Node node, int curDepth)
+        {
+            if (curDepth <= MaxDepth)
             {
-                return this;
+                foreach (Connaissances c in node.getNext())
+                {
+                    Node child = new Node(c);
+                    node.addChild(build(child, curDepth + 1));
+                }
             }
-            this.Position = pos;
-            foreach (Enum.Action a in actionsAvailable(pos))
-            {   
-                Arbre enf = new Arbre();
-                enf.Parent = this;
-                enf.Profondeur = this.Profondeur + 1;
-                this.Enfant.Add(enf.build(pos.move(a),c));
-            }
-
-            return this;
-
+            return node;
         }
-        
-        public ArrayList actionsAvailable(Coordonnees pos)
-        {    ArrayList action = new ArrayList();
-            action.Add(Enum.Action.aspirer);
-            action.Add(Enum.Action.recuperer);
-            if (pos.X != 0)
-            {
-                action.Add(Enum.Action.bas);
-            }
-            if (pos.Y != 0)
-            {
-                action.Add(Enum.Action.gauche);
-            }
-            if (pos.X != 9)
-            {
-                action.Add(Enum.Action.haut);
-            }
-            if (pos.Y != 9)
-            {
-                action.Add(Enum.Action.droite);
-            }
 
-            return action;
-        }
-        
-        public Arbre Parent
+        public int MaxDepth
         {
-            get => _parent;
-            set => _parent = value;
+            get => _maxDepth;
+            set => _maxDepth = value;
         }
 
-        public ArrayList Enfant
+        public Connaissances Connaissances
         {
-            get => _enfant;
-            set => _enfant = value;
+            get => _connaissances;
+            set => _connaissances = value;
         }
-
-        public int Profondeur
-        {
-            get => _profondeur;
-            set => _profondeur = value;
-        }
-
-        public int Score
-        {
-            get => _score;
-            set => _score = value;
-        }
-
-        public Coordonnees Position
-        {
-            get => _position;
-            set => _position = value;
-        }
-
     }
-    
-    
 }

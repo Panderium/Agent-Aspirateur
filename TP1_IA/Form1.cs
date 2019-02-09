@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Enum = TP1_IA.model.Enum;
+using TP1_IA.model;
 
 namespace TP1_IA
 {
     public partial class Form1 : Form
 {
-    Graphics g = null;
+    Graphics g;
     int numOfCells = 10;
     int cellSize = 50;
     
@@ -51,7 +45,7 @@ namespace TP1_IA
         }
     }
 
-    private void drawInCell(Pen p, Enum.Chambre chambre)
+    private void drawInCell(Pen p, EnumIA.Chambre chambre)
     {
         
     }

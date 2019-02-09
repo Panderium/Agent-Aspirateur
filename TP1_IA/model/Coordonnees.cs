@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TP1_IA.model
+﻿namespace TP1_IA.model
 {
     public class Coordonnees
     {
@@ -17,20 +11,20 @@ namespace TP1_IA.model
             Y = y;
         }
 
-        public Coordonnees move( Enum.Action a)
+        public Coordonnees move( EnumIA.Action a)
         {
             switch (a)
             {
-                case Enum.Action.bas:
+                case EnumIA.Action.bas:
                     Y--;
                     break;
-                case Enum.Action.haut:
+                case EnumIA.Action.haut:
                     Y++;
                     break;
-                case Enum.Action.gauche:
+                case EnumIA.Action.gauche:
                     X--;
                     break;
-                case Enum.Action.droite:
+                case EnumIA.Action.droite:
                     X++;
                     break;
             }

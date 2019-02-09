@@ -1,3 +1,5 @@
+using System;
+
 namespace TP1_IA.strategy
 {
     public class UninformedSearch : SearchStrategy
@@ -7,7 +9,7 @@ namespace TP1_IA.strategy
 
         public void execute()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

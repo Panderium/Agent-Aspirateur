@@ -9,7 +9,6 @@ namespace TP1_IA.model
         private Coordonnees _coordonnees;
         private Environnement _environnement;
         private int _score;
-        private Connaissances _connaissances;
         private Desire _desire;
         private Intentions _intentions;
         private Capteurs _capteurs;
@@ -22,9 +21,7 @@ namespace TP1_IA.model
         public Agent(Coordonnees c, Environnement e, SearchStrategy strategy)
         {
             _coordonnees = c;
-            _environnement = e;
             _score = 0;
-            _connaissances = new Connaissances();
             _desire = new Desire();
             _intentions = new Intentions();
             _capteurs = new Capteurs();
@@ -35,7 +32,7 @@ namespace TP1_IA.model
             _valeur.Add("bijou", 15);
             _strategy = strategy;
         }
-
+        
         private void changeStrategy(SearchStrategy strategy)
         {
             _strategy = strategy;
@@ -55,41 +52,41 @@ namespace TP1_IA.model
             Coordonnees plusProche = null;
             foreach (Coordonnees c in liste)
             {
-                if (distance > this.distance(this._coordonnees, c))
+                if (distance > this.distance(_coordonnees, c))
                 {
-                    distance = this.distance(this._coordonnees, c);
+                    distance = this.distance(_coordonnees, c);
                     plusProche = c;
                 }
             }
             return plusProche;
         }
 
-        public void fillIntention(Coordonnees c, Enum.Action type)
+        public void fillIntention(Coordonnees c, EnumIA.Action type)
         {
             while(distance(_coordonnees, c) > 0){
-                if (c.X > this._coordonnees.X)
-                    _intentions.empile(Enum.Action.droite);
+                if (c.X > _coordonnees.X)
+                    _intentions.empile(EnumIA.Action.droite);
                 else
                 {
-                    if (c.X < this._coordonnees.X)
-                        _intentions.empile(Enum.Action.gauche);
+                    if (c.X < _coordonnees.X)
+                        _intentions.empile(EnumIA.Action.gauche);
                 }
 
-                if (c.Y > this._coordonnees.Y)
-                    _intentions.empile(Enum.Action.haut);
+                if (c.Y > _coordonnees.Y)
+                    _intentions.empile(EnumIA.Action.haut);
                 else
                 {
-                    if (c.Y < this._coordonnees.Y)
-                        _intentions.empile(Enum.Action.bas);
+                    if (c.Y < _coordonnees.Y)
+                        _intentions.empile(EnumIA.Action.bas);
                 }
-                if(c.X.Equals(this._coordonnees.X) && c.Y.Equals(this._coordonnees.Y))
+                if(c.X.Equals(_coordonnees.X) && c.Y.Equals(_coordonnees.Y))
                 {
                     _intentions.empile(type);
                 }
             }
         }
 
-        public Enum.Action move()
+        public EnumIA.Action move()
         {
             return _intentions.depile();
         }
@@ -104,17 +101,17 @@ namespace TP1_IA.model
 
             // quel mouvement est le plus rentable
             Coordonnees objectifCoordonnee = null;
-            Enum.Action objectifType;
+            EnumIA.Action objectifType;
             if (-(distance(_coordonnees, lePlusProche(_connaissances.Bijoux))) + _valeur["bijou"] <
                 -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
             {
                 objectifCoordonnee = lePlusProche(_connaissances.Bijoux);
-                objectifType = Enum.Action.recuperer;
+                objectifType = EnumIA.Action.recuperer;
             }
             else
             {
                 objectifCoordonnee = lePlusProche(_connaissances.Poussieres);
-                objectifType = Enum.Action.aspirer;
+                objectifType = EnumIA.Action.aspirer;
             }
 
             fillIntention(objectifCoordonnee, objectifType);
@@ -122,7 +119,7 @@ namespace TP1_IA.model
             // move vers ce mouvement.
             while(_intentions.size() != 0)
             {
-                Enum.Action action = move();
+                EnumIA.Action action = move();
                 _effecteur.act(action, _environnement, _coordonnees);
             }
 

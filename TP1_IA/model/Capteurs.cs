@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TP1_IA.model
+﻿namespace TP1_IA.model
 {
-    class Capteurs : Contenu
+    class Capteurs 
     {
     }
 }

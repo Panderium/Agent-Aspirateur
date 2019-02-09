@@ -1,11 +1,15 @@
-﻿namespace TP1_IA
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace TP1_IA
 {
     partial class Form1
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Nettoyage des ressources utilisées.
@@ -36,9 +40,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new SizeF(6F, 13F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(800, 450);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
