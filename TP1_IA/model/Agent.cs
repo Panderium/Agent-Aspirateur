@@ -7,6 +7,13 @@ namespace TP1_IA.model
     class Agent
     {
         private Coordonnees _coordonnees;
+
+        public Coordonnees Coordonnees
+        {
+            get => _coordonnees;
+            set => _coordonnees = value;
+        }
+
         private Environnement _environnement;
         private int _score;
         private Connaissances _connaissances;
@@ -16,6 +23,7 @@ namespace TP1_IA.model
         private Effecteurs _effecteur;
         private Dictionary<String, int> _valeur;
         private SearchStrategy _strategy;
+        public static Agent instance = null;
 
         public Agent() : this(new Coordonnees(0,0), new Environnement(), new InformedSearch()) { }
 
@@ -126,6 +134,17 @@ namespace TP1_IA.model
                 _effecteur.act(action, _environnement, _coordonnees);
             }
 
+        }
+        public static Agent Instance
+        {
+            get
+            {
+                if (instance==null)
+                {
+                    instance = new Agent();
+                }
+                return instance;
+            }
         }
     }
 }
