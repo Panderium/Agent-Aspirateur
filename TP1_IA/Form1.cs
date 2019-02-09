@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Enum = TP1_IA.model.Enum;
 
 namespace TP1_IA
 {
     public partial class Form1 : Form
 {
     Graphics g = null;
+    int numOfCells = 10;
+    int cellSize = 50;
+    
+    
+    
     public Form1()
     {
         InitializeComponent();
@@ -29,16 +35,25 @@ namespace TP1_IA
     {
         base.OnPaint(e);
 
-        Brush b = new SolidBrush(Color.Black);
+        Brush b = new SolidBrush(Color.White);
 
-        Pen pen = new Pen(b, 20.5f);
+        Pen p = new Pen(b, 5f);
 
-
-        for ( int i=0;i<10 ;i++)
+        
+        for (int y = 0; y <= numOfCells; ++y)
         {
-            g.DrawLine(pen, new Point(0, i*Height/10), new Point(this.Width, 0));
-            
+            g.DrawLine(p, 0, y * cellSize, numOfCells * cellSize, y * cellSize);
         }
+
+        for (int x = 0; x <= numOfCells; ++x)
+        {
+            g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
+        }
+    }
+
+    private void drawInCell(Pen p, Enum.Chambre chambre)
+    {
+        
     }
 
 
