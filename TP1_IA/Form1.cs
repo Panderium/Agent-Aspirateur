@@ -29,7 +29,6 @@ namespace TP1_IA
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Console.WriteLine("ihihih on draw");
             base.OnPaint(e);
 
             Brush b = new SolidBrush(Color.White);
@@ -44,6 +43,10 @@ namespace TP1_IA
                 g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
             }
 
+            //Coordonnees posAgent = Agent.Instance.Coordonnees;
+            Coordonnees posAgent = new Coordonnees(5,5);
+            Brush b2 = new SolidBrush(Color.Gold);
+            g.FillRectangle(b2,posAgent.X * cellSize, posAgent.Y*cellSize, cellSize,cellSize );
             Environnement env = Environnement.Instance;
                 
             drawInCell(p,env.Chambres );
