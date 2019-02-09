@@ -51,7 +51,8 @@ namespace TP1_IA
 
             //Coordonnees posAgent = Agent.Instance.Coordonnees;
             Coordonnees posAgent = new Coordonnees(5,5);
-            g.DrawRectangle(p,posAgent.X * cellSize, posAgent.Y*cellSize, cellSize,cellSize );
+            Brush b2 = new SolidBrush(Color.Gold);
+            g.FillRectangle(b2,posAgent.X * cellSize, posAgent.Y*cellSize, cellSize,cellSize );
             Environnement env = Environnement.Instance;
                 
             drawInCell(p,env.Chambres );
