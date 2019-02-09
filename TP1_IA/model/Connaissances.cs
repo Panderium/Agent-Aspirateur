@@ -7,13 +7,13 @@ namespace TP1_IA.model
     {
         private EnumIA.Chambre[,] chambres;
         private Coordonnees posAgent;
-        private int score;
+        private int _score;
 
         public Connaissances(EnumIA.Chambre[,] chambres, Coordonnees posAgent, int score)
         {
             this.chambres = chambres;
             this.posAgent = posAgent;
-            this.score = score;
+            this._score = score;
         }
 
         public List<Connaissances> getNext()
@@ -26,27 +26,27 @@ namespace TP1_IA.model
                 {
                     case EnumIA.Action.bas:
                         connaissanceses.Add(new Connaissances(chambres, new Coordonnees(posAgent.X, posAgent.Y + 1),
-                            score - 1));
+                            _score - 1));
                         break;
                     case EnumIA.Action.haut:
                         connaissanceses.Add(new Connaissances(chambres, new Coordonnees(posAgent.X, posAgent.Y - 1),
-                            score - 1));
+                            _score - 1));
                         break;
                     case EnumIA.Action.droite:
                         connaissanceses.Add(new Connaissances(chambres, new Coordonnees(posAgent.X + 1, posAgent.Y),
-                            score - 1));
+                            _score - 1));
                         break;
                     case EnumIA.Action.gauche:
                         connaissanceses.Add(new Connaissances(chambres, new Coordonnees(posAgent.X - 1, posAgent.Y),
-                            score - 1));
+                            _score - 1));
                         break;
                     case EnumIA.Action.aspirer:
                         connaissanceses.Add(new Connaissances(chambres, posAgent,
-                            score + 10));
+                            _score + 10));
                         break;
                     case EnumIA.Action.recuperer:
                         connaissanceses.Add(new Connaissances(chambres, posAgent,
-                            score + 30));
+                            _score + 30));
                         break;
                 }
             }
@@ -89,6 +89,12 @@ namespace TP1_IA.model
             }
 
             return action;
+        }
+
+        public int Score
+        {
+            get => _score;
+            set => _score = value;
         }
     }
 }

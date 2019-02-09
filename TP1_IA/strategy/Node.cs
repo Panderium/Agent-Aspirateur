@@ -23,6 +23,11 @@ namespace TP1_IA.strategy
         {
             return _root.getNext();
         }
+
+        public int getScore()
+        {
+            return _root.Score;
+        }
     }
     
 }
