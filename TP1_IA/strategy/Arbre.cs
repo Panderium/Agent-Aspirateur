@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
 using TP1_IA.model;
 using Enum = TP1_IA.model.Enum;
@@ -15,22 +16,23 @@ namespace TP1_IA.strategy
         private int _score = 0;
         private Coordonnees _position = null;
 
-        public Arbre build(Coordonnees pos,Connaissances c, Arbre n)
+        public Arbre build(Coordonnees pos,Connaissances c)
         {
             
-            if (n.Profondeur > _max_dept)
+            if (this.Profondeur > _max_dept)
             {
-                return n;
+                return this;
             }
-            n.Position = pos;
+            this.Position = pos;
             foreach (Enum.Action a in actionsAvailable(pos))
             {   
                 Arbre enf = new Arbre();
-                enf.Parent = n;
-                enf.Profondeur = n.Profondeur + 1;
-                n.Enfant.Add(build(pos.move(a),c,enf));
+                enf.Parent = this;
+                enf.Profondeur = this.Profondeur + 1;
+                this.Enfant.Add(enf.build(pos.move(a),c));
             }
-            
+
+            return this;
 
         }
         
