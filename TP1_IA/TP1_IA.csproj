@@ -53,8 +53,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="model\Agent.cs" />
+    <Compile Include="model\Belief.cs" />
     <Compile Include="model\Capteurs.cs" />
-    <Compile Include="model\Contenu.cs" />
     <Compile Include="model\Coordonnees.cs" />
     <Compile Include="model\Connaissances.cs" />
     <Compile Include="model\Desire.cs" />

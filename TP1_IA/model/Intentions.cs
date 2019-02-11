@@ -6,15 +6,15 @@ namespace TP1_IA.model
     // liste des mouvements et des actions à effectuer pour atteindre le prochain but
     class Intentions
     {
-        private Stack<EnumIA.Action> _intentions = new Stack<EnumIA.Action>();
+        private Queue<EnumIA.Action> _intentions = new Queue<EnumIA.Action>();
 
         public void empile(EnumIA.Action ea)
         {
-            _intentions.Push(ea);
+            _intentions.Enqueue(ea);
         }
         public EnumIA.Action depile()
         {
-            return _intentions.Pop();
+            return _intentions.Dequeue();
         }
         public void vider()
         {

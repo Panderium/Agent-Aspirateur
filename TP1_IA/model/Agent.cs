@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TP1_IA.strategy;
 
 namespace TP1_IA.model
@@ -7,14 +8,8 @@ namespace TP1_IA.model
     class Agent
     {
         private Coordonnees _coordonnees;
-
-        public Coordonnees Coordonnees
-        {
-            get => _coordonnees;
-            set => _coordonnees = value;
-        }
-
         private Environnement _environnement;
+        private Belief _belief;
         private int _score;
         private Desire _desire;
         private Intentions _intentions;
@@ -24,7 +19,9 @@ namespace TP1_IA.model
         private SearchStrategy _strategy;
         public static Agent instance = null;
 
-        public Agent() : this(new Coordonnees(0,0), new Environnement(), new InformedSearch()) { }
+        public Agent() : this(new Coordonnees(0, 0), new Environnement(), new InformedSearch())
+        {
+        }
 
         public Agent(Coordonnees c, Environnement e, SearchStrategy strategy)
         {
@@ -39,11 +36,12 @@ namespace TP1_IA.model
             _valeur.Add("poussiere", 10);
             _valeur.Add("bijou", 15);
             _strategy = strategy;
+            _belief = new Belief();
         }
-        
-        private void changeStrategy(SearchStrategy strategy)
+
+        private void setStategy(SearchStrategy strategy)
         {
-            _strategy = strategy;
+            _strategy = strapritegy;
         }
 
         public int distance(Coordonnees a, Coordonnees b)
@@ -66,12 +64,14 @@ namespace TP1_IA.model
                     plusProche = c;
                 }
             }
+
             return plusProche;
         }
 
         public void fillIntention(Coordonnees c, EnumIA.Action type)
         {
-            while(distance(_coordonnees, c) > 0){
+            while (distance(_coordonnees, c) > 0)
+            {
                 if (c.X > _coordonnees.X)
                     _intentions.empile(EnumIA.Action.droite);
                 else
@@ -87,7 +87,8 @@ namespace TP1_IA.model
                     if (c.Y < _coordonnees.Y)
                         _intentions.empile(EnumIA.Action.bas);
                 }
-                if(c.X.Equals(_coordonnees.X) && c.Y.Equals(_coordonnees.Y))
+
+                if (c.X.Equals(_coordonnees.X) && c.Y.Equals(_coordonnees.Y))
                 {
                     _intentions.empile(type);
                 }
@@ -98,50 +99,53 @@ namespace TP1_IA.model
         {
             return _intentions.depile();
         }
-
-        public void moveAndActToOptimum()
+        private void observeEnvironment()
+        {
+            _capteurs.observeEnvironment(_environnement);
+        }
+        private void updateState()
+        {
+            _belief.updateBeliefs(_capteurs.Dust, _capteurs.Jewels);
+        }
+        private void chooseAction()
+        {
+            List<EnumIA.Action> actions = _strategy.execute();
+            foreach (EnumIA.Action action in actions)
+            {
+                _intentions.empile(action);
+            }
+        }
+        private void justDoIt()
         {
             
-            // chaque mouvement du robot lui fait perdre 1 point
-            // les Bijoux et les Poussieres rapportent pas le même nombre de points
-            // cherche le bijoux le plus proche et la poussière la plus proche, regarde celui qui raporte le plus de points en incluant les déplacements
-            // donne les mouvements et l'actions à faire grâce aux énums sous forme de pile dans Intention.
-
-            // quel mouvement est le plus rentable
-            Coordonnees objectifCoordonnee = null;
-            EnumIA.Action objectifType;
-            if (-(distance(_coordonnees, lePlusProche(_connaissances.Bijoux))) + _valeur["bijou"] <
-                -(distance(_coordonnees, lePlusProche(_connaissances.Poussieres))) + _valeur["poussiere"])
+        }
+        public void run()
+        {
+            while (true)
             {
-                objectifCoordonnee = lePlusProche(_connaissances.Bijoux);
-                objectifType = EnumIA.Action.recuperer;
+                observeEnvironment();
+                updateState();
+                if (_belief.Dust.Any() && _belief.Jewels.Any()) continue;
+                chooseAction();
+                justDoIt();
             }
-            else
-            {
-                objectifCoordonnee = lePlusProche(_connaissances.Poussieres);
-                objectifType = EnumIA.Action.aspirer;
-            }
-
-            fillIntention(objectifCoordonnee, objectifType);
-
-            // move vers ce mouvement.
-            while(_intentions.size() != 0)
-            {
-                EnumIA.Action action = move();
-                _effecteur.act(action, _environnement, _coordonnees);
-            }
-
         }
         public static Agent Instance
         {
             get
             {
-                if (instance==null)
+                if (instance == null)
                 {
                     instance = new Agent();
                 }
+
                 return instance;
             }
+        }
+       public Coordonnees Coordonnees
+        {
+            get => _coordonnees;
+            set => _coordonnees = value;
         }
     }
 }

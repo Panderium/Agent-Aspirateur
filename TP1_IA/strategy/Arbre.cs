@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using TP1_IA.model;
 
 namespace TP1_IA.strategy
@@ -36,6 +34,12 @@ namespace TP1_IA.strategy
         {
             get => _maxDepth;
             set => _maxDepth = value;
+        }
+
+        public Node Root
+        {
+            get => _root;
+            set => _root = value;
         }
 
         public Connaissances Connaissances

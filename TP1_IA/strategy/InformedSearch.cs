@@ -6,7 +6,7 @@ namespace TP1_IA.strategy
     {
         
         //Add method to build tree
-        private 
+         
         
         public void execute()
         {
