@@ -1,7 +1,9 @@
+using TP1_IA.model;
+
 namespace TP1_IA.strategy
 {
     public interface SearchStrategy
     {
-        void execute(Node node, int depth);
+        EnumIA.Action execute(Node node, int depth);
     }
 }

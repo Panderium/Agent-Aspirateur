@@ -6,6 +6,7 @@ namespace TP1_IA.model
     {
         private List<Coordonnees> jewels;
         private List<Coordonnees> dust;
+        private Environnement env;
 
         public Capteurs()
         {
@@ -25,13 +26,13 @@ namespace TP1_IA.model
             set => dust = value;
         }
 
-        public void observeEnvironment(Environnement environnement)
+        public void observeEnvironment()
         {
-            for (int i = 0; i < environnement.Chambres.Length; i++)
+            for (int i = 0; i < env.Chambres.Length; i++)
             {
-                for (int j = 0; j < environnement.Chambres.Length; j++)
+                for (int j = 0; j < env.Chambres.Length; j++)
                 {
-                    switch (environnement.Chambres[i, j])
+                    switch (env.Chambres[i, j])
                     {
                         case EnumIA.Chambre.bijou:
                             Jewels.Add(new Coordonnees(i, j));

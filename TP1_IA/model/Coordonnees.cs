@@ -1,4 +1,7 @@
-﻿namespace TP1_IA.model
+﻿using System;
+using System.Collections.Generic;
+
+namespace TP1_IA.model
 {
     public class Coordonnees
     {
@@ -30,6 +33,25 @@
             }
 
             return this;
+        }
+
+        public bool Equals(Coordonnees c)
+        {
+            return (c.X == X && c.Y == Y);
+        }
+
+        public List<Coordonnees> remove(List<Coordonnees> l)
+        {
+            List<Coordonnees> newlist = new List<Coordonnees>();
+            foreach (Coordonnees c in l)
+            {
+                if (!c.Equals(this))
+                {
+                    newlist.Add(c);
+                }
+            }
+
+            return newlist;
         }
 
         public int X
