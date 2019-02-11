@@ -50,7 +50,6 @@
     <Compile Include="model\Belief.cs" />
     <Compile Include="model\Capteurs.cs" />
     <Compile Include="model\Coordonnees.cs" />
-    <Compile Include="model\Connaissances.cs" />
     <Compile Include="model\Desire.cs" />
     <Compile Include="model\Effecteurs.cs" />
     <Compile Include="model\EnumIA.cs" />

@@ -25,14 +25,14 @@ namespace TP1_IA.strategy
         }
 
 
-        // recherche en pronfondeur jusqu'à une limite : regarde toutes les actions en partant d'un noeuds jusqu'à la profondeur, puis un autre noeuds etc.
+        // recherche en pronfondeur jusqu'ï¿½ une limite : regarde toutes les actions en partant d'un noeuds jusqu'ï¿½ la profondeur, puis un autre noeuds etc.
         public Node depthLimitedSearch(Agent agent, int profondeurMax)
         {
-            Node root = new Node(agent.Coordonnees, agent.Belief.Jewels, agent.Belief.Dust, 0, 0);
+            Node root = new Node(agent.Coordonnees, agent.Belief.Jewels, agent.Belief.Dust, 0);
             Node currentNode = root;
             int profondeurActuelle = 0;
             int indexAction = 0;
-            int actionSize = 4; // Quantité d'action dans l'énum
+            int actionSize = 4; // Quantitï¿½ d'action dans l'ï¿½num
             Boolean keeprunning = true;
 
             // tant que l'arbre n'est pas plein
@@ -67,7 +67,7 @@ namespace TP1_IA.strategy
                                 }
                             }
                         }
-                        // si on est déjà au fond et qu'on a fait toutes les Actions
+                        // si on est dï¿½jï¿½ au fond et qu'on a fait toutes les Actions
                         else
                         {
                             
@@ -83,7 +83,7 @@ namespace TP1_IA.strategy
                         }
                         indexAction = 0;
                     }
-                    // Si il rests des actions à effectuer sur le noeud
+                    // Si il rests des actions ï¿½ effectuer sur le noeud
                     else
                     {
                         // si on n'est pas au fond
@@ -115,7 +115,7 @@ namespace TP1_IA.strategy
                     }
                    
                 }
-                else // c'est qu'on est déja passé par ce coté, il faut avancé dans l'arbre
+                else // c'est qu'on est dï¿½ja passï¿½ par ce cotï¿½, il faut avancï¿½ dans l'arbre
                 {
                     if (indexAction == actionSize - 1)
                     {
@@ -147,44 +147,44 @@ namespace TP1_IA.strategy
                 if (node.Coordonnees.X == 0)
                     return null;
                 else
-                    return new Node(new Coordonnees((node.Coordonnees.X - 1), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore()-1, node.getHeuristique());
+                    return new Node(new Coordonnees((node.Coordonnees.X - 1), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore()-1);
             }
             if (indexAction == 1) // bas
             {
                 if (node.Coordonnees.X == 10)
                     return null;
                 else
-                    return new Node(new Coordonnees((node.Coordonnees.X + 1), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() - 1, node.getHeuristique());
+                    return new Node(new Coordonnees((node.Coordonnees.X + 1), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() - 1);
             }
             if (indexAction == 2) // droite
             {
                 if (node.Coordonnees.Y == 10)
                     return null;
                 else
-                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y+1), node.Jewels, node.Dust, node.getScore() - 1, node.getHeuristique());
+                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y+1), node.Jewels, node.Dust, node.getScore() - 1);
             }
             if (indexAction == 3) // gauche
             {
                 if (node.Coordonnees.Y == 0)
                     return null;
                 else
-                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y - 1), node.Jewels, node.Dust, node.getScore() - 1, node.getHeuristique());
+                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y - 1), node.Jewels, node.Dust, node.getScore() - 1);
             }
             if (indexAction == 4) // aspirer
             {
                 if (Environnement.Instance.getRoom(node.Coordonnees).Equals(EnumIA.Chambre.bijou) || Environnement.Instance.getRoom(node.Coordonnees).Equals(EnumIA.Chambre.poussiereEtBijou))
-                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() - 15, node.getHeuristique());
+                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() - 15);
                 else
                     if(Environnement.Instance.getRoom(node.Coordonnees).Equals(EnumIA.Chambre.poussiere))
-                        return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() +10, node.getHeuristique());
-                return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() - 1, node.getHeuristique());
+                        return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() +10);
+                return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() - 1);
 
             }
             if (indexAction == 5) // recuperer
             {
                 if (Environnement.Instance.getRoom(node.Coordonnees).Equals(EnumIA.Chambre.bijou) || Environnement.Instance.getRoom(node.Coordonnees).Equals(EnumIA.Chambre.poussiereEtBijou))
-                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() + 20, node.getHeuristique());
-                return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y ), node.Jewels, node.Dust, node.getScore() - 1, node.getHeuristique());
+                    return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y), node.Jewels, node.Dust, node.getScore() + 20);
+                return new Node(new Coordonnees((node.Coordonnees.X), node.Coordonnees.Y ), node.Jewels, node.Dust, node.getScore() - 1);
             }
         }
 
@@ -192,9 +192,9 @@ namespace TP1_IA.strategy
 
 
 
-            /* Création d'un arbre
-             * Création profondeur = 0
-             * Création indexAction = 0
+            /* Crï¿½ation d'un arbre
+             * Crï¿½ation profondeur = 0
+             * Crï¿½ation indexAction = 0
              * while( arbre[profondeurMax].[actionSize] != null)
              * {
              *     if(indexAction < actionSize && si arbre[profondeurActuelle].[indexAction] == null){
@@ -214,7 +214,7 @@ namespace TP1_IA.strategy
             *              }
             *          }
         *          }
-             *     else // c'est qu'on est déja passé par ce coté, il faut avancé dans l'arbre
+             *     else // c'est qu'on est dï¿½ja passï¿½ par ce cotï¿½, il faut avancï¿½ dans l'arbre
              *     {
              *          if(indexAction == actionSize-1)
              *              profondeur--;
@@ -243,9 +243,9 @@ namespace TP1_IA.strategy
 
 /*
  * X = profondeur, Y = Enum.action()
- * jusqu'à profondeur X : 
+ * jusqu'ï¿½ profondeur X : 
  * 1 faire l'action Y
- * 2 Si t'es à X, tu remontes ou si Y est au max
+ * 2 Si t'es ï¿½ X, tu remontes ou si Y est au max
  * 3 Si tu peux faire une action Y+1, alors tu la fait
  * 
  */

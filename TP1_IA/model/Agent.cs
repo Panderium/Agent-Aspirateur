@@ -8,7 +8,6 @@ namespace TP1_IA.model
     class Agent
     {
         private Coordonnees _coordonnees;
-        private Environnement _environnement;
         private Belief _belief;
         private int _score;
         //private Desire _desire;
@@ -19,11 +18,11 @@ namespace TP1_IA.model
         private SearchStrategy _strategy;
         public static Agent instance = null;
 
-        public Agent() : this(new Coordonnees(0, 0), new Environnement(), new InformedSearch())
+        public Agent() : this(new Coordonnees(0, 0), new InformedSearch())
         {
         }
 
-        public Agent(Coordonnees c, Environnement e, SearchStrategy strategy)
+        public Agent(Coordonnees c, SearchStrategy strategy)
         {
             _coordonnees = c;
             _score = 0;
@@ -99,21 +98,18 @@ namespace TP1_IA.model
         {
             return _intentions.depile();
         }
-        private void observeEnvironment()
-        {
-            _capteurs.observeEnvironment(_environnement);
-        }
+
         private void updateState()
         {
             _belief.updateBeliefs(_capteurs.Dust, _capteurs.Jewels);
         }
         private void chooseAction()
         {
-            List<EnumIA.Action> actions = _strategy.execute();
+            /*List<EnumIA.Action> actions = _strategy.execute( );
             foreach (EnumIA.Action action in actions)
             {
                 _intentions.empile(action);
-            }
+            }*/
         }
         private void justDoIt()
         {
@@ -123,13 +119,15 @@ namespace TP1_IA.model
         {
             while (true)
             {
-                observeEnvironment();
+                Capteurs.observeEnvironment();
+                
                 updateState();
                 if (_belief.Dust.Any() && _belief.Jewels.Any()) continue;
                 chooseAction();
                 justDoIt();
             }
         }
+
         public static Agent Instance
         {
             get
@@ -147,17 +145,47 @@ namespace TP1_IA.model
             get => _coordonnees;
             set => _coordonnees = value;
         }
+       public Belief Belief
+       {
+           get => _belief;
+           set => _belief = value;
+       }
 
-        public Capteurs Capteur
-        {
-            get => _capteurs;
-            set => _capteurs = value;
-        }
+       public int Score
+       {
+           get => _score;
+           set => _score = value;
+       }
 
-        public Belief Belief
-        {
-            get => _belief;
-            set => _belief = value;
-        }
+
+       public Intentions Intentions
+       {
+           get => _intentions;
+           set => _intentions = value;
+       }
+
+       public Capteurs Capteurs
+       {
+           get => _capteurs;
+           set => _capteurs = value;
+       }
+
+       public Effecteurs Effecteur
+       {
+           get => _effecteur;
+           set => _effecteur = value;
+       }
+
+       public Dictionary<string, int> Valeur
+       {
+           get => _valeur;
+           set => _valeur = value;
+       }
+
+       public SearchStrategy Strategy
+       {
+           get => _strategy;
+           set => _strategy = value;
+       }
     }
 }

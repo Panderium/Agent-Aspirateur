@@ -33,9 +33,6 @@ namespace TP1_IA.model
                 int Y = rnd.Next(0, 10);
 
                 int typeStuff = rnd.Next(0, 10);
-                Console.WriteLine(X);
-                Console.WriteLine(Y);
-                Console.WriteLine(typeStuff);
                 if (typeStuff < 2)
                 {
                     if (chambres[X, Y] == EnumIA.Chambre.poussiere)

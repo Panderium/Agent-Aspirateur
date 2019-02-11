@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using TP1_IA.model;
-using TP1_IA.strategy;
+
 
 namespace TP1_IA
 {
@@ -26,17 +27,40 @@ namespace TP1_IA
             t.Start();
             
             
-            Application.EnableVisualStyles();
+            /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(form);
+            Application.Run(form); */
                      
-            
-            
-            
-            
+          
             
         }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         public static void updateUI()
         {
             
