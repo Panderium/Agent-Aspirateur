@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TP1_IA.model;
 
@@ -62,6 +63,39 @@ namespace TP1_IA.strategy
         {
             get => actions;
             set => actions = value;
+        }
+
+        public Coordonnees Coordonnees
+        {
+            get => Coordonnees;
+            set => Coordonnees = value;
+        }
+
+        public Boolean hasChild()
+        {
+            if (children.Equals(null))
+                return false;
+            return true;
+        }
+
+        public Node getChild(int index)
+        {
+            return children[index];
+        }
+
+        public Node getFather()
+        {
+            return father;
+        }
+
+        public int getScore()
+        {
+            return score;
+        }
+
+        public int getHeuristique()
+        {
+            return heuristique;
         }
     }
     

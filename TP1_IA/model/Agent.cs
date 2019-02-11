@@ -11,7 +11,7 @@ namespace TP1_IA.model
         private Environnement _environnement;
         private Belief _belief;
         private int _score;
-        private Desire _desire;
+        //private Desire _desire;
         private Intentions _intentions;
         private Capteurs _capteurs;
         private Effecteurs _effecteur;
@@ -27,7 +27,7 @@ namespace TP1_IA.model
         {
             _coordonnees = c;
             _score = 0;
-            _desire = new Desire();
+            //_desire = new Desire();
             _intentions = new Intentions();
             _capteurs = new Capteurs();
             _effecteur = new Effecteurs();
@@ -41,7 +41,7 @@ namespace TP1_IA.model
 
         private void setStategy(SearchStrategy strategy)
         {
-            _strategy = strapritegy;
+            _strategy = strategy;
         }
 
         public int distance(Coordonnees a, Coordonnees b)
@@ -142,10 +142,22 @@ namespace TP1_IA.model
                 return instance;
             }
         }
-       public Coordonnees Coordonnees
+        public Coordonnees Coordonnees
         {
             get => _coordonnees;
             set => _coordonnees = value;
+        }
+
+        public Capteurs Capteur
+        {
+            get => _capteurs;
+            set => _capteurs = value;
+        }
+
+        public Belief Belief
+        {
+            get => _belief;
+            set => _belief = value;
         }
     }
 }
