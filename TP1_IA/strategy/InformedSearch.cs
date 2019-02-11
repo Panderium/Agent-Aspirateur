@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using TP1_IA.model;
 
 namespace TP1_IA.strategy
 {
@@ -8,7 +10,7 @@ namespace TP1_IA.strategy
         //Add method to build tree
 
 
-        public void execute(Node node, int depth)
+        public List<EnumIA.Action> execute(Node node, int depth)
         {
             throw new NotImplementedException();
         }

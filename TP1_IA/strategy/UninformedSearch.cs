@@ -33,9 +33,9 @@ namespace TP1_IA.strategy
 
         public List<EnumIA.Action> execute(Node node, int depth)
         {
-            List<Node> result = search(node, depth);
-            Random rand = new Random();
-            return result.ElementAt(rand.Next(1, result.Count) - 1).getActions();
+            var result = search(node, depth);
+            var rand = new Random();
+            return result.ElementAt(rand.Next(1, result.Count) - 1).Actions;
         }
     }
 }

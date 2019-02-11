@@ -23,7 +23,8 @@ namespace TP1_IA.strategy
             children = new List<Node>();
         }
 
-        public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, List<EnumIA.Action> actions, int score, int heuristique, Node father, List<Node> children)
+        public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, List<EnumIA.Action> actions,
+            int score, int heuristique, Node father, List<Node> children)
         {
             this.posAgent = posAgent;
             this.jewels = jewels;
@@ -33,6 +34,7 @@ namespace TP1_IA.strategy
             this.father = father;
             this.children = children;
         }
+
         private List<EnumIA.Action> actionsAvailable()
         {
             List<EnumIA.Action> action = new List<EnumIA.Action>();
@@ -43,6 +45,7 @@ namespace TP1_IA.strategy
                     action.Add(EnumIA.Action.recuperer);
                 }
             }
+
             foreach (Coordonnees c in Dust)
             {
                 if (posAgent.Equals(posAgent))
@@ -50,8 +53,6 @@ namespace TP1_IA.strategy
                     action.Add(EnumIA.Action.aspirer);
                 }
             }
-
-           
 
             if (posAgent.Y != 9)
             {
@@ -75,54 +76,49 @@ namespace TP1_IA.strategy
 
             return action;
         }
-        
-        public List<Node> getNext()
+
+        public List<Node> nextNode()
         {
-            List<Node> listenode = new List<Node>();
+            List<Node> listNode = new List<Node>();
 
             foreach (EnumIA.Action action in actionsAvailable())
             {
                 switch (action)
                 {
                     case EnumIA.Action.bas:
-                        listenode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1),Jewels,Dust,
+                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
                             score - 1));
                         break;
                     case EnumIA.Action.haut:
-                        listenode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y - 1),Jewels,Dust,
+                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y - 1), Jewels, Dust,
                             score - 1));
                         break;
                     case EnumIA.Action.droite:
-                        listenode.Add(new Node(new Coordonnees(posAgent.X + 1, posAgent.Y),Jewels,Dust,
+                        listNode.Add(new Node(new Coordonnees(posAgent.X + 1, posAgent.Y), Jewels, Dust,
                             score - 1));
                         break;
                     case EnumIA.Action.gauche:
-                        listenode.Add(new Node(new Coordonnees(posAgent.X - 1, posAgent.Y),Jewels,Dust,
+                        listNode.Add(new Node(new Coordonnees(posAgent.X - 1, posAgent.Y), Jewels, Dust,
                             score - 1));
                         break;
                     case EnumIA.Action.aspirer:
-                        listenode.Add(new Node(posAgent,Jewels,posAgent.remove(Dust),
+                        listNode.Add(new Node(posAgent, Jewels, posAgent.remove(Dust),
                             score + 10));
                         break;
                     case EnumIA.Action.recuperer:
                         Jewels.Remove(posAgent);
-                        listenode.Add(new Node(posAgent,posAgent.remove(Jewels),Dust,
+                        listNode.Add(new Node(posAgent, posAgent.remove(Jewels), Dust,
                             score + 30));
                         break;
                 }
             }
 
-            return listenode;
+            return listNode;
         }
 
         public void addChild(Node node)
         {
             children.Add(node);
-        }
-
-        public List<Node> nextNode()
-        {
-            return new List<Node>();
         }
 
         public List<Coordonnees> Jewels
@@ -151,9 +147,7 @@ namespace TP1_IA.strategy
 
         public Boolean hasChild()
         {
-            if (children.Equals(null))
-                return false;
-            return true;
+            return !children.Equals(null);
         }
 
         public Node getChild(int index)
@@ -171,7 +165,6 @@ namespace TP1_IA.strategy
             return score;
         }
 
-
+        
     }
-    
 }
