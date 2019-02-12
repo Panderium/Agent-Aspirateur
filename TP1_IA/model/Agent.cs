@@ -125,6 +125,8 @@ namespace TP1_IA.model
                 if (_belief.Dust.Any() && _belief.Jewels.Any()) continue;
                 chooseAction();
                 justDoIt();
+                Console.WriteLine("X : " + this.Coordonnees.X);
+                Console.WriteLine("Y : " + this.Coordonnees.Y);
             }
         }
 
