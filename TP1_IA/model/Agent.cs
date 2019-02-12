@@ -43,15 +43,9 @@ namespace TP1_IA.model
             _strategy = strategy;
         }
 
-        public int distance(Coordonnees a, Coordonnees b)
-        {
-            int distance = 0;
-            distance += Math.Abs(a.X - b.X);
-            distance += Math.Abs(a.Y - b.Y);
-            return distance;
-        }
+        
 
-        public Coordonnees lePlusProche(List<Coordonnees> liste)
+        /*public Coordonnees lePlusProche(List<Coordonnees> liste)
         {
             int distance = 10000; // infini
             Coordonnees plusProche = null;
@@ -65,9 +59,9 @@ namespace TP1_IA.model
             }
 
             return plusProche;
-        }
+        }*/
 
-        public void fillIntention(Coordonnees c, EnumIA.Action type)
+        /*public void fillIntention(Coordonnees c, EnumIA.Action type)
         {
             while (distance(_coordonnees, c) > 0)
             {
@@ -92,7 +86,7 @@ namespace TP1_IA.model
                     _intentions.empile(type);
                 }
             }
-        }
+        }*/
 
         public EnumIA.Action move()
         {
@@ -130,7 +124,11 @@ namespace TP1_IA.model
                 if (_belief.Dust.Any() && _belief.Jewels.Any()) continue;
                 chooseAction();
                 justDoIt();
+                Console.WriteLine("X : " + this.Coordonnees.X);
+                Console.WriteLine("Y : " + this.Coordonnees.Y);
+                System.Threading.Thread.Sleep(1000);
             }
+            Console.WriteLine("FINI");
         }
 
         public static Agent Instance

@@ -20,7 +20,9 @@ namespace TP1_IA
         /// </summary>
         [STAThread]
         static void Main()
-        {                
+        {
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
             form = new Form1();
 
             env = Environnement.Instance;
@@ -28,11 +30,10 @@ namespace TP1_IA
             t = new Thread(env.generateStuff);
             t2 = new Thread(agent.run);
             t.Start();
-            
-            
-            /*Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(form); */
+            Thread.Sleep(500);
+            t2.Start();
+
+            Application.Run(form); 
                      
           
             
