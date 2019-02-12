@@ -108,9 +108,9 @@ namespace TP1_IA.model
         private void justDoIt()
         {
             int nbIter = 5;
-            for (int i = 0; i < nbIter; i++)
+            for (int i = 0; i < _intentions.size(); i++)
             {
-                _effecteur.act(_intentions.depile(),Environnement.Instance, _coordonnees);
+                this._coordonnees = (_effecteur.act(_intentions.depile(),Environnement.Instance, _coordonnees));
             }
             _intentions.vider();
         }
@@ -121,14 +121,11 @@ namespace TP1_IA.model
                 Capteurs.observeEnvironment();
                 
                 updateState();
-                if (_belief.Dust.Any() && _belief.Jewels.Any()) continue;
+                if (!_belief.Dust.Any() && !_belief.Jewels.Any()) continue;
                 chooseAction();
                 justDoIt();
-                Console.WriteLine("X : " + this.Coordonnees.X);
-                Console.WriteLine("Y : " + this.Coordonnees.Y);
                 System.Threading.Thread.Sleep(1000);
             }
-            Console.WriteLine("FINI");
         }
 
         public static Agent Instance

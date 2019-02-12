@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using TP1_IA.model;
@@ -24,13 +25,14 @@ namespace TP1_IA
             Application.SetCompatibleTextRenderingDefault(false);
             Application.EnableVisualStyles();
             form = new Form1();
+            form.BackColor = Color.Black;
 
             env = Environnement.Instance;
             agent = Agent.Instance;
             t = new Thread(env.generateStuff);
             t2 = new Thread(agent.run);
             t.Start();
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
             t2.Start();
 
             Application.Run(form); 
