@@ -28,6 +28,9 @@ namespace TP1_IA.model
 
         public void observeEnvironment()
         {
+            jewels = new List<Coordonnees>();
+            dust = new List<Coordonnees>();
+
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -35,18 +38,14 @@ namespace TP1_IA.model
                     switch (env.Chambres[i, j])
                     {
                         case EnumIA.Chambre.bijou:
-                            if(!Jewels.Contains(new Coordonnees(i, j)))
-                                Jewels.Add(new Coordonnees(i, j));
+                            Jewels.Add(new Coordonnees(i, j));
                             break;
                         case EnumIA.Chambre.poussiere :
-                            if (!Dust.Contains(new Coordonnees(i, j)))
-                                Dust.Add(new Coordonnees(i, j));
+                            Dust.Add(new Coordonnees(i, j));
                             break;
                         case EnumIA.Chambre.poussiereEtBijou:
-                            if (!Jewels.Contains(new Coordonnees(i, j)))
-                                Jewels.Add(new Coordonnees(i, j));
-                            if (!Dust.Contains(new Coordonnees(i, j)))
-                                Dust.Add(new Coordonnees(i, j));
+                            Jewels.Add(new Coordonnees(i, j));
+                            Dust.Add(new Coordonnees(i, j));
                             break;
                     }
                 }
