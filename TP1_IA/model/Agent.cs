@@ -121,7 +121,9 @@ namespace TP1_IA.model
                 justDoIt();
                 Console.WriteLine("X : " + this.Coordonnees.X);
                 Console.WriteLine("Y : " + this.Coordonnees.Y);
+                System.Threading.Thread.Sleep(1000);
             }
+            Console.WriteLine("FINI");
         }
 
         public static Agent Instance

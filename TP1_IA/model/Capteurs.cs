@@ -35,14 +35,18 @@ namespace TP1_IA.model
                     switch (env.Chambres[i, j])
                     {
                         case EnumIA.Chambre.bijou:
-                            Jewels.Add(new Coordonnees(i, j));
+                            if(!Jewels.Contains(new Coordonnees(i, j)))
+                                Jewels.Add(new Coordonnees(i, j));
                             break;
                         case EnumIA.Chambre.poussiere :
-                            Dust.Add(new Coordonnees(i, j));
+                            if (!Dust.Contains(new Coordonnees(i, j)))
+                                Dust.Add(new Coordonnees(i, j));
                             break;
                         case EnumIA.Chambre.poussiereEtBijou:
-                            Jewels.Add(new Coordonnees(i, j));
-                            Dust.Add(new Coordonnees(i, j));
+                            if (!Jewels.Contains(new Coordonnees(i, j)))
+                                Jewels.Add(new Coordonnees(i, j));
+                            if (!Dust.Contains(new Coordonnees(i, j)))
+                                Dust.Add(new Coordonnees(i, j));
                             break;
                     }
                 }
