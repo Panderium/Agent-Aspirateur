@@ -22,7 +22,7 @@ namespace TP1_IA.model
         }
         public int size()
         {
-            return _intentions.Count();
+            return _intentions.Count;
         }
     }
 }

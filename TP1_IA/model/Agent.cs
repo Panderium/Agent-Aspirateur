@@ -113,7 +113,12 @@ namespace TP1_IA.model
         }
         private void justDoIt()
         {
-            
+            int nbIter = 5;
+            for (int i = 0; i < nbIter; i++)
+            {
+                _effecteur.act(_intentions.depile(),Environnement.Instance, _coordonnees);
+            }
+            _intentions.vider();
         }
         public void run()
         {
