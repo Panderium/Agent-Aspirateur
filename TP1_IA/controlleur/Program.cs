@@ -33,10 +33,7 @@ namespace TP1_IA
             Thread.Sleep(500);
             t2.Start();
 
-            
-            /*Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(form); */
+            Application.Run(form); 
                      
           
             
