@@ -14,25 +14,21 @@ namespace TP1_IA.model
             Y = y;
         }
 
-        public Coordonnees move( EnumIA.Action a)
+        public Coordonnees move(EnumIA.Action ea)
         {
-            switch (a)
+            switch (ea)
             {
-                case EnumIA.Action.bas:
-                    Y--;
-                    break;
-                case EnumIA.Action.haut:
-                    Y++;
-                    break;
                 case EnumIA.Action.gauche:
-                    X--;
-                    break;
+                    return new Coordonnees(this.X - 1, this.Y);
                 case EnumIA.Action.droite:
-                    X++;
-                    break;
-            }
-
-            return this;
+                    return new Coordonnees(this.X + 1, this.Y);
+                case EnumIA.Action.bas:
+                    return new Coordonnees(this.X, this.Y + 1);
+                case EnumIA.Action.haut:
+                    return new Coordonnees(this.X, this.Y - 1);
+                default:
+                    return this;
+            } 
         }
 
         public bool Equals(Coordonnees c)

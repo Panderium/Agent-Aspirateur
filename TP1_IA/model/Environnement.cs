@@ -5,6 +5,11 @@ namespace TP1_IA.model
     class Environnement
     {
         private EnumIA.Chambre[ , ] chambres = new EnumIA.Chambre[10,10];
+        private int score = 0;
+        public int sRamasse = 30;
+        public int sAspire = 10;
+        public int sAspireBijoux = -50;
+        
         Random rnd = new Random();
 
         public EnumIA.Chambre[,] Chambres
@@ -56,6 +61,49 @@ namespace TP1_IA.model
                 System.Threading.Thread.Sleep(1000);
                 
             }
+        }
+        
+        public void aspire( Coordonnees c)
+        {
+            EnumIA.Chambre ec = getRoom(c);
+            switch (ec)
+            {
+                case EnumIA.Chambre.poussiere:
+                    score += sAspire;
+                    break;
+                case EnumIA.Chambre.poussiereEtBijou:
+                    score += sAspire;
+                    score += sAspireBijoux;
+                    break;
+                case EnumIA.Chambre.bijou:
+                    score += sAspireBijoux;
+                    break;
+            }
+            setRoom(c, EnumIA.Chambre.vide);
+            
+        }
+        public void ramasse( Coordonnees c)
+        {
+            EnumIA.Chambre ec = getRoom(c);
+            switch (ec)
+            {
+                case EnumIA.Chambre.poussiere:
+                    score -= 1;
+                    break;
+                case EnumIA.Chambre.poussiereEtBijou:
+                    score += sRamasse;
+                    setRoom(c, EnumIA.Chambre.poussiere);
+                    break;
+                case EnumIA.Chambre.bijou:
+                    score += sRamasse;
+                    setRoom(c, EnumIA.Chambre.vide);
+                    break;
+            }
+            
+        }
+        public void move()
+        {
+            score -= 1;
         }
 
         public EnumIA.Chambre getRoom(Coordonnees c)

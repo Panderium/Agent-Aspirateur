@@ -2,66 +2,30 @@
 {
     class Effecteurs
     {
-
-        public void act(EnumIA.Action ea, Environnement e, Coordonnees c)
+        private Environnement env = Environnement.Instance;
+        private Agent ag = null;
+        public void act(EnumIA.Action ea, Coordonnees c)
         {
-            if (ea.Equals(EnumIA.Action.aspirer))
+            if (ag == null)
             {
-                aspire(e, c);
+                ag = Agent.Instance;
             }
-            if (ea.Equals(EnumIA.Action.recuperer))
+            if (ea == EnumIA.Action.aspirer)
             {
-                ramasse(e, c);
+                env.aspire(c);
+            }
+            if (ea == EnumIA.Action.recuperer)
+            {
+                env.ramasse(c);
             }
             else
             {
-                bouger(ea, c);
+                ag.Coordonnees = c.move(ea);
+                env.move();
             }
         }
 
-        private void aspire(Environnement e, Coordonnees c)
-        {
-            EnumIA.Chambre ec = e.getRoom(c);
-            if (ec.Equals(EnumIA.Chambre.poussiere))
-            {
-                e.setRoom(c, EnumIA.Chambre.vide);
-                // OK + gestion du score
-            }
-            if(ec.Equals(EnumIA.Chambre.poussiereEtBijou) || ec.Equals(EnumIA.Chambre.bijou))
-            {
-                e.setRoom(c, EnumIA.Chambre.vide);
-                // KO + gestion du score
-            }
-        }
-        private void ramasse(Environnement e, Coordonnees c)
-        {
-            EnumIA.Chambre ec = e.getRoom(c);
-            if (ec.Equals(EnumIA.Chambre.poussiereEtBijou) || ec.Equals(EnumIA.Chambre.bijou))
-            {
-                e.setRoom(c, EnumIA.Chambre.vide);
-                // OK
-            }
-            if (ec.Equals(EnumIA.Chambre.poussiere))
-            {
-                e.setRoom(c, EnumIA.Chambre.vide);
-                // KO
-            }
-        }
-        private Coordonnees bouger(EnumIA.Action ea, Coordonnees actualCoord)
-        {
-            switch (ea)
-            {
-                case EnumIA.Action.gauche:
-                    return new Coordonnees(actualCoord.X - 1, actualCoord.Y);
-                case EnumIA.Action.droite:
-                    return new Coordonnees(actualCoord.X + 1, actualCoord.Y);
-                case EnumIA.Action.bas:
-                    return new Coordonnees(actualCoord.X, actualCoord.Y + 1);
-                case EnumIA.Action.haut:
-                    return new Coordonnees(actualCoord.X, actualCoord.Y - 1);
-                default:
-                    return actualCoord;
-            } 
-        }
+        
+        
     }
 }

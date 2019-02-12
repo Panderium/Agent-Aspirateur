@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace TP1_IA.model
 {
@@ -23,6 +25,17 @@ namespace TP1_IA.model
         public int size()
         {
             return _intentions.Count;
+        }
+
+        public override String ToString()
+        {    StringBuilder s = new StringBuilder();
+            foreach (EnumIA.Action a in _intentions.ToArray())
+            {
+                s.Append(a);
+            }
+
+            return s.ToString();
+
         }
     }
 }

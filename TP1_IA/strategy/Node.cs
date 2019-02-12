@@ -43,7 +43,7 @@ namespace TP1_IA.strategy
             List<EnumIA.Action> action = new List<EnumIA.Action>();
             foreach (Coordonnees c in Jewels)
             {
-                if (posAgent.Equals(posAgent))
+                if (c.Equals(posAgent))
                 {
                     action.Add(EnumIA.Action.recuperer);
                 }
@@ -51,7 +51,7 @@ namespace TP1_IA.strategy
 
             foreach (Coordonnees c in Dust)
             {
-                if (posAgent.Equals(posAgent))
+                if (c.Equals(posAgent))
                 {
                     action.Add(EnumIA.Action.aspirer);
                 }
@@ -92,30 +92,29 @@ namespace TP1_IA.strategy
                         List<EnumIA.Action> tempBas = new List<EnumIA.Action>();
                         tempBas.AddRange(this.actions);
                         tempBas.Add(EnumIA.Action.bas);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
+                        listNode.Add(new Node(posAgent.move(EnumIA.Action.bas), Jewels, Dust,
                            tempBas, score - 1, 0, this, null));
                         break;
                     case EnumIA.Action.haut:
                         List<EnumIA.Action> tempHaut = new List<EnumIA.Action>();
                         tempHaut.AddRange(this.actions);
                         tempHaut.Add(EnumIA.Action.haut);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
+                        listNode.Add(new Node(posAgent.move(EnumIA.Action.haut), Jewels, Dust,
                            tempHaut, score - 1, 0, this, null));
                         break;
                     case EnumIA.Action.droite:
                         List<EnumIA.Action> tempDroite = new List<EnumIA.Action>();
                         tempDroite.AddRange(this.actions);
                         tempDroite.Add(EnumIA.Action.droite);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
+                        listNode.Add(new Node(posAgent.move(EnumIA.Action.droite), Jewels, Dust,
                            tempDroite, score - 1, 0, this, null));
-                        listNode.Add(new Node(new Coordonnees(posAgent.X + 1, posAgent.Y), Jewels, Dust,
-                            score - 1));
+                        
                         break;
                     case EnumIA.Action.gauche:
                         List<EnumIA.Action> tempGauche = new List<EnumIA.Action>();
                         tempGauche.AddRange(this.actions);
                         tempGauche.Add(EnumIA.Action.gauche);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
+                        listNode.Add(new Node(posAgent.move(EnumIA.Action.gauche), Jewels, Dust,
                            tempGauche, score - 1, 0, this, null));
                         break;
                     case EnumIA.Action.aspirer:
@@ -123,16 +122,16 @@ namespace TP1_IA.strategy
                         List<EnumIA.Action> tempAspirer = new List<EnumIA.Action>();
                         tempAspirer.AddRange(this.actions);
                         tempAspirer.Add(EnumIA.Action.aspirer);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempAspirer, score + 9, 0, this, null));
+                        listNode.Add(new Node(posAgent, Jewels, posAgent.remove(Dust),
+                           tempAspirer, score + 10, 0, this, null));
                         break;
                     case EnumIA.Action.recuperer:
                         Jewels.Remove(posAgent);
                         List<EnumIA.Action> tempRecuperer = new List<EnumIA.Action>();
                         tempRecuperer.AddRange(this.actions);
                         tempRecuperer.Add(EnumIA.Action.recuperer);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempRecuperer, score + 29, 0, this, null));
+                        listNode.Add(new Node(posAgent, posAgent.remove(Jewels), Dust,
+                           tempRecuperer, score + 30, 0, this, null));
                         break;
                 }
             }

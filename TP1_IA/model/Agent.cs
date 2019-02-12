@@ -109,8 +109,9 @@ namespace TP1_IA.model
         {
             int nbIter = 5;
             for (int i = 0; i < nbIter; i++)
-            {
-                _effecteur.act(_intentions.depile(),Environnement.Instance, _coordonnees);
+            {   
+                if (_intentions.size() != 0)
+                _effecteur.act(_intentions.depile(), _coordonnees);
             }
             _intentions.vider();
         }
@@ -121,8 +122,10 @@ namespace TP1_IA.model
                 Capteurs.observeEnvironment();
                 
                 updateState();
-                if (_belief.Dust.Any() && _belief.Jewels.Any()) continue;
+                if ( !_belief.Dust.Any() && !_belief.Jewels.Any()) continue;
                 chooseAction();
+                Console.WriteLine("Intentions: "+ Intentions.ToString());
+
                 justDoIt();
                 Console.WriteLine("X : " + this.Coordonnees.X);
                 Console.WriteLine("Y : " + this.Coordonnees.Y);
