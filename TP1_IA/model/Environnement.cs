@@ -132,5 +132,10 @@ namespace TP1_IA.model
                 return instance;
             }
         }
+
+        public int getScore()
+        {
+            return score;
+        }
     }
 }

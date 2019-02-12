@@ -48,6 +48,7 @@ namespace TP1_IA
             Brush b2 = new SolidBrush(Color.Gold);
             g.FillRectangle(b2,posAgent.X * cellSize, posAgent.Y*cellSize, cellSize,cellSize );
             Environnement env = Environnement.Instance;
+            label1.Text = "Score : " + env.getScore();
                 
             drawInCell(p,env.Chambres );
         }
@@ -77,6 +78,22 @@ namespace TP1_IA
                 }
 
                 g.DrawString(s, f, Brushes.White, i * cellSize + cellSize / 6, j * cellSize + cellSize / 6);
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton1.Checked)
+            {
+                // Agent.Instance Créer les instances pour pouvoir les appeler ici.
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+
             }
         }
     }
