@@ -10,31 +10,33 @@ namespace TP1_IA.strategy
         private List<Coordonnees> jewels;
         private List<Coordonnees> dust;
         private List<EnumIA.Action> actions;
-        private int score;
+        private int heuristic;
         private Node father;
         private List<Node> children;
+        private static int weightHeuritic = 10;
 
-        public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, int score)
+
+        public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, int heuristic)
         {
             this.posAgent = posAgent;
             this.jewels = jewels;
             this.dust = dust;
-            this.score = score;
+            this.heuristic = heuristic;
             children = new List<Node>();
             actions = new List<EnumIA.Action>();
         }
 
         public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, List<EnumIA.Action> actions,
-            int score, int heuristique, Node father, List<Node> children)
+            int heuristic, Node father, List<Node> children)
         {
             this.posAgent = posAgent;
             this.jewels = jewels;
             this.dust = dust;
             this.actions = actions;
-            this.score = score;
             this.father = father;
             this.children = children;
-            if(actions == null)
+            this.heuristic = heuristic;
+            if (actions == null)
                 actions = new List<EnumIA.Action>();
         }
 
@@ -139,6 +141,27 @@ namespace TP1_IA.strategy
             return listNode;
         }
 
+        private int calculHeuristic()
+        {
+            int onDustOrJewels = 0;
+            int distance = 0;
+            foreach (Coordonnees c in dust)
+            {
+                if (c.distance(posAgent) == 0)
+                    onDustOrJewels++;
+                else distance += c.distance(posAgent);
+            }
+
+            foreach (Coordonnees c in jewels)
+            {
+                if (c.distance(posAgent) == 0)
+                    onDustOrJewels++;
+                else distance += c.distance(posAgent);
+            }
+
+            return weightHeuritic * (jewels.Count + dust.Count) + distance - weightHeuritic * onDustOrJewels;
+        }
+
         public void addChild(Node node)
         {
             children.Add(node);
@@ -183,11 +206,10 @@ namespace TP1_IA.strategy
             return father;
         }
 
-        public int getScore()
+        public int Heuristic
         {
-            return score;
+            get => heuristic;
+            set => heuristic = value;
         }
-
-        
     }
 }

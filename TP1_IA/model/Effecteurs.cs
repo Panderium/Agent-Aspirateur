@@ -1,4 +1,6 @@
-﻿namespace TP1_IA.model
+﻿using System;
+
+namespace TP1_IA.model
 {
     class Effecteurs
     {
