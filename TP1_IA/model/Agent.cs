@@ -39,7 +39,7 @@ namespace TP1_IA.model
             _belief = new Belief();
         }
 
-        private void setStategy(SearchStrategy strategy)
+        public void setStategy(SearchStrategy strategy)
         {
             _strategy = strategy;
         }

@@ -37,10 +37,10 @@ namespace TP1_IA
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.uninformedSearch = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.informedSearch = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -53,18 +53,18 @@ namespace TP1_IA
             this.label1.TabIndex = 0;
             this.label1.Text = "Score : ";
             // 
-            // radioButton1
+            // uninformedSearch
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.ForeColor = System.Drawing.Color.White;
-            this.radioButton1.Location = new System.Drawing.Point(622, 99);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(82, 17);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Non-informé";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.uninformedSearch.AutoSize = true;
+            this.uninformedSearch.ForeColor = System.Drawing.Color.White;
+            this.uninformedSearch.Location = new System.Drawing.Point(622, 99);
+            this.uninformedSearch.Name = "uninformedSearch";
+            this.uninformedSearch.Size = new System.Drawing.Size(82, 17);
+            this.uninformedSearch.TabIndex = 1;
+            this.uninformedSearch.TabStop = true;
+            this.uninformedSearch.Text = "Non-informé";
+            this.uninformedSearch.UseVisualStyleBackColor = true;
+            this.uninformedSearch.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // label2
             // 
@@ -86,18 +86,18 @@ namespace TP1_IA
             this.label3.TabIndex = 4;
             this.label3.Text = "Informé";
             // 
-            // radioButton2
+            // informedSearch
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.ForeColor = System.Drawing.Color.White;
-            this.radioButton2.Location = new System.Drawing.Point(622, 183);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(60, 17);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Informé";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.informedSearch.AutoSize = true;
+            this.informedSearch.ForeColor = System.Drawing.Color.White;
+            this.informedSearch.Location = new System.Drawing.Point(622, 183);
+            this.informedSearch.Name = "informedSearch";
+            this.informedSearch.Size = new System.Drawing.Size(60, 17);
+            this.informedSearch.TabIndex = 3;
+            this.informedSearch.TabStop = true;
+            this.informedSearch.Text = "Informé";
+            this.informedSearch.UseVisualStyleBackColor = true;
+            this.informedSearch.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // Form1
             // 
@@ -105,9 +105,9 @@ namespace TP1_IA
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.informedSearch);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.uninformedSearch);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -119,10 +119,10 @@ namespace TP1_IA
         #endregion
 
         private Label label1;
-        private RadioButton radioButton1;
+        private RadioButton uninformedSearch;
         private Label label2;
         private Label label3;
-        private RadioButton radioButton2;
+        private RadioButton informedSearch;
 
         
     }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using TP1_IA.model;
+using TP1_IA.strategy;
 using Enum = TP1_IA.model.EnumIA;
 
 
@@ -12,6 +13,8 @@ namespace TP1_IA
         Graphics g = null;
         int numOfCells = 10;
         int cellSize = 50;
+        InformedSearch infSe = new InformedSearch();
+        UninformedSearch uninfSe = new UninformedSearch();
 
 
         public Form1()
@@ -83,17 +86,17 @@ namespace TP1_IA
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton1.Checked)
+            if(uninformedSearch.Checked)
             {
-                // Agent.Instance Créer les instances pour pouvoir les appeler ici.
+                Agent.instance.setStategy(uninfSe);
             }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (informedSearch.Checked)
             {
-
+                Agent.instance.setStategy(infSe);
             }
         }
     }
