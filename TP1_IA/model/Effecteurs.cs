@@ -1,21 +1,25 @@
-﻿namespace TP1_IA.model
+﻿using System;
+
+namespace TP1_IA.model
 {
     class Effecteurs
     {
 
-        public void act(EnumIA.Action ea, Environnement e, Coordonnees c)
+        public Coordonnees act(EnumIA.Action ea, Environnement e, Coordonnees c)
         {
             if (ea.Equals(EnumIA.Action.aspirer))
             {
                 aspire(e, c);
+                return c;
             }
             if (ea.Equals(EnumIA.Action.recuperer))
             {
                 ramasse(e, c);
+                return c;
             }
             else
             {
-                bouger(ea, c);
+                return bouger(ea, c);
             }
         }
 
