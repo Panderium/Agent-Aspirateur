@@ -95,21 +95,21 @@ namespace TP1_IA.strategy
                         tempBas.AddRange(this.actions);
                         tempBas.Add(EnumIA.Action.bas);
                         listNode.Add(new Node(posAgent.move(EnumIA.Action.bas), Jewels, Dust,
-                           tempBas, score - 1, 0, this, null));
+                           tempBas, calculHeuristic(), this, null));
                         break;
                     case EnumIA.Action.haut:
                         List<EnumIA.Action> tempHaut = new List<EnumIA.Action>();
                         tempHaut.AddRange(this.actions);
                         tempHaut.Add(EnumIA.Action.haut);
                         listNode.Add(new Node(posAgent.move(EnumIA.Action.haut), Jewels, Dust,
-                           tempHaut, score - 1, 0, this, null));
+                           tempHaut, calculHeuristic(), this, null));
                         break;
                     case EnumIA.Action.droite:
                         List<EnumIA.Action> tempDroite = new List<EnumIA.Action>();
                         tempDroite.AddRange(this.actions);
                         tempDroite.Add(EnumIA.Action.droite);
                         listNode.Add(new Node(posAgent.move(EnumIA.Action.droite), Jewels, Dust,
-                           tempDroite, score - 1, 0, this, null));
+                           tempDroite, calculHeuristic(), this, null));
                         
                         break;
                     case EnumIA.Action.gauche:
@@ -117,7 +117,7 @@ namespace TP1_IA.strategy
                         tempGauche.AddRange(this.actions);
                         tempGauche.Add(EnumIA.Action.gauche);
                         listNode.Add(new Node(posAgent.move(EnumIA.Action.gauche), Jewels, Dust,
-                           tempGauche, score - 1, 0, this, null));
+                           tempGauche, calculHeuristic(), this, null));
                         break;
                     case EnumIA.Action.aspirer:
                         Dust.Remove(posAgent);
@@ -125,7 +125,7 @@ namespace TP1_IA.strategy
                         tempAspirer.AddRange(this.actions);
                         tempAspirer.Add(EnumIA.Action.aspirer);
                         listNode.Add(new Node(posAgent, Jewels, posAgent.remove(Dust),
-                           tempAspirer, score + 10, 0, this, null));
+                           tempAspirer, calculHeuristic(), this, null));
                         break;
                     case EnumIA.Action.recuperer:
                         Jewels.Remove(posAgent);
@@ -133,7 +133,7 @@ namespace TP1_IA.strategy
                         tempRecuperer.AddRange(this.actions);
                         tempRecuperer.Add(EnumIA.Action.recuperer);
                         listNode.Add(new Node(posAgent, posAgent.remove(Jewels), Dust,
-                           tempRecuperer, score + 30, 0, this, null));
+                           tempRecuperer, calculHeuristic(), this, null));
                         break;
                 }
             }
