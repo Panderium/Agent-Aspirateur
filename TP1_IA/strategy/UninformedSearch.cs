@@ -13,7 +13,7 @@ namespace TP1_IA.strategy
             List<Node> visitedNode = new List<Node>();
             file.Enqueue(curNode);
 
-
+            depth = (int) Math.Pow(depth, 6);
             while (depth > 0 || Desire.desireReach(curNode))
             {
                 curNode = file.Dequeue();
@@ -23,8 +23,9 @@ namespace TP1_IA.strategy
                     foreach (Node nextNode in curNode.nextNode())
                     {
                         file.Enqueue(nextNode);
-                        depth--;
                     }
+
+                    depth--;
                 }
             }
 
@@ -34,8 +35,8 @@ namespace TP1_IA.strategy
         public List<EnumIA.Action> execute(Node node, int depth)
         {
             var result = search(node, depth);
-            var rand = new Random();
-            return result.ElementAt(rand.Next(1, result.Count) - 1).Actions;
+            
+            return Desire.selectBetterNode(result);
         }
     }
 }

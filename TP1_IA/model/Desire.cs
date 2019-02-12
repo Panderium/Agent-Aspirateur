@@ -10,5 +10,23 @@ namespace TP1_IA.model
         {
             return !(node.Dust.Any() || node.Jewels.Any());
         }
+
+
+        public static List<EnumIA.Action> selectBetterNode(List<Node> l)
+        {
+            int min = 10000;
+            List<EnumIA.Action> aMax = new List<EnumIA.Action>();
+            foreach (Node n  in l)
+            {
+                int nbAction = n.Dust.Count + n.Jewels.Count;
+                if (nbAction < min)
+                {
+                    min = nbAction;
+                    aMax = n.Actions;
+                }
+            }
+
+            return aMax;
+        }
     }
 }

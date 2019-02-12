@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using TP1_IA.strategy;
 
 namespace TP1_IA.model
@@ -99,7 +100,7 @@ namespace TP1_IA.model
         }
         private void chooseAction()
         {
-            List<EnumIA.Action> actions = _strategy.execute(new Node(Coordonnees, Belief.Jewels, Belief.Dust, Score), 8);
+            List<EnumIA.Action> actions = _strategy.execute(new Node(Coordonnees, Belief.Jewels, Belief.Dust, Score), 5);
             foreach (EnumIA.Action action in actions)
             {
                 _intentions.empile(action);
@@ -112,6 +113,8 @@ namespace TP1_IA.model
             {   
                 if (_intentions.size() != 0)
                 _effecteur.act(_intentions.depile(), _coordonnees);
+                Program.updateUI();
+                Thread.Sleep(100);
             }
             _intentions.vider();
         }
