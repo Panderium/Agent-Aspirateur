@@ -30,11 +30,13 @@ namespace TP1_IA
             t = new Thread(env.generateStuff);
             t2 = new Thread(agent.run);
             t.Start();
+            Thread.Sleep(500);
             t2.Start();
-            agent.run();
 
             
-            Application.Run(form); 
+            /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(form); */
                      
           
             

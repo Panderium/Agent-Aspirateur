@@ -39,6 +39,12 @@ namespace TP1_IA.model
         {
             return (c.X == X && c.Y == Y);
         }
+        
+        public int distance(Coordonnees a)
+        {
+            return Math.Abs(a.X - this.X)+ Math.Abs(a.Y - this.Y);
+           
+        }
 
         public List<Coordonnees> remove(List<Coordonnees> l)
         {
