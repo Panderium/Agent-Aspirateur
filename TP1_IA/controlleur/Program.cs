@@ -10,6 +10,7 @@ namespace TP1_IA
     static class Program
     {
         private static Environnement env = null;
+        private static Agent agent;
         private static Thread t = null;
         private static Thread t2 = null;
         private static Form1 form = null;
@@ -23,7 +24,9 @@ namespace TP1_IA
             form = new Form1();
 
             env = Environnement.Instance;
+            agent = Agent.Instance;
             t = new Thread(env.generateStuff);
+            t2 = new Thread(agent.run);
             t.Start();
             
             

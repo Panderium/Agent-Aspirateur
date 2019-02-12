@@ -18,7 +18,7 @@ namespace TP1_IA.model
         private SearchStrategy _strategy;
         public static Agent instance = null;
 
-        public Agent() : this(new Coordonnees(0, 0), new InformedSearch())
+        public Agent() : this(new Coordonnees(0, 0), new UninformedSearch())
         {
         }
 
@@ -105,11 +105,11 @@ namespace TP1_IA.model
         }
         private void chooseAction()
         {
-            /*List<EnumIA.Action> actions = _strategy.execute( );
+            List<EnumIA.Action> actions = _strategy.execute(new Node(Coordonnees, Belief.Jewels, Belief.Dust, Score), 8);
             foreach (EnumIA.Action action in actions)
             {
                 _intentions.empile(action);
-            }*/
+            }
         }
         private void justDoIt()
         {
