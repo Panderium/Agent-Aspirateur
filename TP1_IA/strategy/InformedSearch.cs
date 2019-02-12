@@ -1,42 +1,66 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using TP1_IA.model;
 
 namespace TP1_IA.strategy
 {
     public class InformedSearch : SearchStrategy
-
     {
-        private int weight = 10;
-
         //Add method to build tree
+        private List<EnumIA.Action> search(Node node)
+        {
+            List<Node> closedList = new List<Node>();
+            List<Node> openList = new List<Node>();
+            openList.Add(node);
+
+            while (openList.Any())
+            {
+                var curNode = selectNode(openList);
+                openList.Remove(curNode);
+                closedList.Add(node);
+                if (Desire.desireReach(curNode))
+                {
+                    return curNode.Actions;
+                }
+
+                foreach (var nNode in curNode.nextNode())
+                {
+                    nNode.Heuristic = heuristique()
+                    if (!openList.Contains(nNode))
+                    {
+                        openList.Add(nNode);
+                    }
+                    else if (nNode.Heuristic > curNode.Heuristic)
+                    {
+                        curNode = nNode;
+                    }
+                }
+            }
+
+            return null;
+        }
 
 
         public List<EnumIA.Action> execute(Node node, int depth)
         {
-            throw new NotImplementedException();
+            return search(node);
         }
 
-        public int heuristique(Coordonnees posAgent, List<Coordonnees> dusts, List<Coordonnees> jewels)
+        private Node selectNode(List<Node> list)
         {
-            int onDustOrJewels = 0;
-            int distance = 0;
-            foreach (Coordonnees c in dusts)
+            var curNode = list.ElementAt(0);
+
+            for (int i = 1; i < list.Count; i++)
             {
-                if (c.distance(posAgent) == 0)
-                    onDustOrJewels++;
-                else distance += c.distance(posAgent);
+                if (curNode.Heuristic > list.ElementAt(i).Heuristic)
+                {
+                    curNode = list.ElementAt(i);
+                }
             }
 
-            foreach (Coordonnees c in jewels)
-            {
-                if (c.distance(posAgent) == 0)
-                    onDustOrJewels++;
-                else distance += c.distance(posAgent);
-            }
-
-            return weight * (jewels.Count + dusts.Count) + distance - weight * onDustOrJewels;
+            return curNode;
         }
     }
 }

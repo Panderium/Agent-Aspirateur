@@ -10,31 +10,33 @@ namespace TP1_IA.strategy
         private List<Coordonnees> jewels;
         private List<Coordonnees> dust;
         private List<EnumIA.Action> actions;
-        private int score;
+        private int heuristic;
         private Node father;
         private List<Node> children;
+        private static int weightHeuritic = 10;
 
-        public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, int score)
+
+        public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, int heuristic)
         {
             this.posAgent = posAgent;
             this.jewels = jewels;
             this.dust = dust;
-            this.score = score;
+            this.heuristic = heuristic;
             children = new List<Node>();
             actions = new List<EnumIA.Action>();
         }
 
         public Node(Coordonnees posAgent, List<Coordonnees> jewels, List<Coordonnees> dust, List<EnumIA.Action> actions,
-            int score, int heuristique, Node father, List<Node> children)
+            int heuristic, Node father, List<Node> children)
         {
             this.posAgent = posAgent;
             this.jewels = jewels;
             this.dust = dust;
             this.actions = actions;
-            this.score = score;
             this.father = father;
             this.children = children;
-            if(actions == null)
+            this.heuristic = heuristic;
+            if (actions == null)
                 actions = new List<EnumIA.Action>();
         }
 
@@ -92,31 +94,30 @@ namespace TP1_IA.strategy
                         List<EnumIA.Action> tempBas = new List<EnumIA.Action>();
                         tempBas.AddRange(this.actions);
                         tempBas.Add(EnumIA.Action.bas);
-                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempBas, score - 1, 0, this, null));
+                        listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust, 
+                            tempBas, calculHeuristic(),this, null));
                         break;
                     case EnumIA.Action.haut:
                         List<EnumIA.Action> tempHaut = new List<EnumIA.Action>();
                         tempHaut.AddRange(this.actions);
                         tempHaut.Add(EnumIA.Action.haut);
                         listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempHaut, score - 1, 0, this, null));
+                            tempHaut, calculHeuristic(),this, null));
                         break;
                     case EnumIA.Action.droite:
                         List<EnumIA.Action> tempDroite = new List<EnumIA.Action>();
                         tempDroite.AddRange(this.actions);
                         tempDroite.Add(EnumIA.Action.droite);
                         listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempDroite, score - 1, 0, this, null));
-                        listNode.Add(new Node(new Coordonnees(posAgent.X + 1, posAgent.Y), Jewels, Dust,
-                            score - 1));
+                            tempDroite, calculHeuristic(),this, null));
+                        listNode.Add(new Node(new Coordonnees(posAgent.X + 1, posAgent.Y), Jewels, Dust, calculHeuristic()));
                         break;
                     case EnumIA.Action.gauche:
                         List<EnumIA.Action> tempGauche = new List<EnumIA.Action>();
                         tempGauche.AddRange(this.actions);
                         tempGauche.Add(EnumIA.Action.gauche);
                         listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempGauche, score - 1, 0, this, null));
+                            tempGauche, calculHeuristic(), this, null));
                         break;
                     case EnumIA.Action.aspirer:
                         Dust.Remove(posAgent);
@@ -124,7 +125,7 @@ namespace TP1_IA.strategy
                         tempAspirer.AddRange(this.actions);
                         tempAspirer.Add(EnumIA.Action.aspirer);
                         listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempAspirer, score + 9, 0, this, null));
+                            tempAspirer, calculHeuristic(),this, null));
                         break;
                     case EnumIA.Action.recuperer:
                         Jewels.Remove(posAgent);
@@ -132,12 +133,33 @@ namespace TP1_IA.strategy
                         tempRecuperer.AddRange(this.actions);
                         tempRecuperer.Add(EnumIA.Action.recuperer);
                         listNode.Add(new Node(new Coordonnees(posAgent.X, posAgent.Y + 1), Jewels, Dust,
-                           tempRecuperer, score + 29, 0, this, null));
+                            tempRecuperer, calculHeuristic(), this, null));
                         break;
                 }
             }
 
             return listNode;
+        }
+
+        private int calculHeuristic()
+        {
+            int onDustOrJewels = 0;
+            int distance = 0;
+            foreach (Coordonnees c in dust)
+            {
+                if (c.distance(posAgent) == 0)
+                    onDustOrJewels++;
+                else distance += c.distance(posAgent);
+            }
+
+            foreach (Coordonnees c in jewels)
+            {
+                if (c.distance(posAgent) == 0)
+                    onDustOrJewels++;
+                else distance += c.distance(posAgent);
+            }
+
+            return weightHeuritic * (jewels.Count + dust.Count) + distance - weightHeuritic * onDustOrJewels;
         }
 
         public void addChild(Node node)
@@ -184,11 +206,10 @@ namespace TP1_IA.strategy
             return father;
         }
 
-        public int getScore()
+        public int Heuristic
         {
-            return score;
+            get => heuristic;
+            set => heuristic = value;
         }
-
-        
     }
 }
