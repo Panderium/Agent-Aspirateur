@@ -28,7 +28,7 @@ namespace TP1_IA
             t = new Thread(env.generateStuff);
             t2 = new Thread(agent.run);
             t.Start();
-            
+            t2.Start();
             
             /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

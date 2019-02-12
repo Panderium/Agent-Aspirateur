@@ -6,7 +6,7 @@ namespace TP1_IA.model
     {
         private List<Coordonnees> jewels;
         private List<Coordonnees> dust;
-        private Environnement env;
+        private Environnement env = Environnement.Instance;
 
         public Capteurs()
         {
@@ -28,9 +28,9 @@ namespace TP1_IA.model
 
         public void observeEnvironment()
         {
-            for (int i = 0; i < env.Chambres.Length; i++)
+            for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < env.Chambres.Length; j++)
+                for (int j = 0; j < 10; j++)
                 {
                     switch (env.Chambres[i, j])
                     {
