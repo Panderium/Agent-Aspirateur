@@ -27,7 +27,7 @@ namespace TP1_IA.strategy
 
                 foreach (var nNode in curNode.nextNode())
                 {
-                    nNode.Heuristic = heuristique()
+                    
                     if (!openList.Contains(nNode))
                     {
                         openList.Add(nNode);
