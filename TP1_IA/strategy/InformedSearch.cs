@@ -14,13 +14,13 @@ namespace TP1_IA.strategy
             List<Node> closedList = new List<Node>();
             List<Node> openList = new List<Node>();
             openList.Add(node);
-
+            
             while (openList.Any())
             {
                 var curNode = selectNode(openList);
                 openList.Remove(curNode);
                 closedList.Add(node);
-                if (Desire.desireReach(curNode))
+                if (Desire.desireReach(curNode) || curNode.Actions.Count > 10)
                 {
                     return curNode.Actions;
                 }
@@ -32,8 +32,8 @@ namespace TP1_IA.strategy
                     {
                         openList.Add(nNode);
                     }
-                    else if (nNode.Heuristic > curNode.Heuristic)
-                    {
+                    else if (nNode.Heuristic < curNode.Heuristic)
+                    {    
                         curNode = nNode;
                     }
                 }

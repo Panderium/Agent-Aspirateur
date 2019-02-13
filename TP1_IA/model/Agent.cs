@@ -19,7 +19,7 @@ namespace TP1_IA.model
         private SearchStrategy _strategy;
         public static Agent instance = null;
 
-        public Agent() : this(new Coordonnees(0, 0), new UninformedSearch())
+        public Agent() : this(new Coordonnees(0, 0), new InformedSearch())
         {
         }
 
@@ -46,49 +46,6 @@ namespace TP1_IA.model
 
         
 
-        /*public Coordonnees lePlusProche(List<Coordonnees> liste)
-        {
-            int distance = 10000; // infini
-            Coordonnees plusProche = null;
-            foreach (Coordonnees c in liste)
-            {
-                if (distance > this.distance(_coordonnees, c))
-                {
-                    distance = this.distance(_coordonnees, c);
-                    plusProche = c;
-                }
-            }
-
-            return plusProche;
-        }*/
-
-        /*public void fillIntention(Coordonnees c, EnumIA.Action type)
-        {
-            while (distance(_coordonnees, c) > 0)
-            {
-                if (c.X > _coordonnees.X)
-                    _intentions.empile(EnumIA.Action.droite);
-                else
-                {
-                    if (c.X < _coordonnees.X)
-                        _intentions.empile(EnumIA.Action.gauche);
-                }
-
-                if (c.Y > _coordonnees.Y)
-                    _intentions.empile(EnumIA.Action.haut);
-                else
-                {
-                    if (c.Y < _coordonnees.Y)
-                        _intentions.empile(EnumIA.Action.bas);
-                }
-
-                if (c.X.Equals(_coordonnees.X) && c.Y.Equals(_coordonnees.Y))
-                {
-                    _intentions.empile(type);
-                }
-            }
-        }*/
-
         public EnumIA.Action move()
         {
             return _intentions.depile();
@@ -114,12 +71,12 @@ namespace TP1_IA.model
                 if (_intentions.size() != 0)
                 _effecteur.act(_intentions.depile(), _coordonnees);
                 Program.updateUI();
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
             _intentions.vider();
         }
         public void run()
-        {
+        {    
             while (true)
             {
                 Capteurs.observeEnvironment();
@@ -130,7 +87,6 @@ namespace TP1_IA.model
                 Console.WriteLine("Intentions: "+ Intentions.ToString());
 
                 justDoIt();
-                System.Threading.Thread.Sleep(1000);
             }
         }
 
