@@ -8,8 +8,8 @@ namespace TP1_IA.model
     {
         public static bool desireReach(Node node)
         {
-            //return (node.Actions.Contains(EnumIA.Action.aspirer) || node.Actions.Contains(EnumIA.Action.recuperer));
-            return !(node.Dust.Any() || node.Jewels.Any());
+            return (node.Actions.Contains(EnumIA.Action.aspirer) || node.Actions.Contains(EnumIA.Action.recuperer));
+            //return !(node.Dust.Any() || node.Jewels.Any());
         }
 
 

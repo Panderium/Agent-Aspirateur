@@ -71,7 +71,7 @@ namespace TP1_IA.model
                 if (_intentions.size() != 0)
                 _effecteur.act(_intentions.depile(), _coordonnees);
                 Program.updateUI();
-                Thread.Sleep(10);
+                Thread.Sleep(100);
             }
             _intentions.vider();
         }

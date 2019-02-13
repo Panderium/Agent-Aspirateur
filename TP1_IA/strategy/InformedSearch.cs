@@ -20,7 +20,7 @@ namespace TP1_IA.strategy
                 var curNode = selectNode(openList);
                 openList.Remove(curNode);
                 closedList.Add(node);
-                if (Desire.desireReach(curNode) || curNode.Actions.Count > 10)
+                if (Desire.desireReach(curNode) || curNode.Actions.Count > 9)
                 {
                     return curNode.Actions;
                 }
@@ -32,7 +32,7 @@ namespace TP1_IA.strategy
                     {
                         openList.Add(nNode);
                     }
-                    else if (nNode.Heuristic < curNode.Heuristic)
+                    else if (nNode.Heuristic > curNode.Heuristic)
                     {    
                         curNode = nNode;
                     }
@@ -54,12 +54,11 @@ namespace TP1_IA.strategy
 
             for (int i = 1; i < list.Count; i++)
             {
-                if (curNode.Heuristic > list.ElementAt(i).Heuristic)
+                if (curNode.Heuristic < list.ElementAt(i).Heuristic)
                 {
                     curNode = list.ElementAt(i);
                 }
             }
-
             return curNode;
         }
     }

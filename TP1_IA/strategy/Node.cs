@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Xsl.Runtime;
 using TP1_IA.model;
 
 namespace TP1_IA.strategy
@@ -189,6 +190,16 @@ namespace TP1_IA.strategy
 
                 }
             }
+            /*int distance = 0;
+            foreach (Coordonnees c in dust)
+            {
+                 distance += c.distance(posAgent);
+            }
+
+            foreach (Coordonnees c in jewels)
+            {
+                 distance += c.distance(posAgent);
+            }*/
 
             return score;
 
