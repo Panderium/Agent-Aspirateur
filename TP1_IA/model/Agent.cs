@@ -11,11 +11,9 @@ namespace TP1_IA.model
         private Coordonnees _coordonnees;
         private Belief _belief;
         private int _score;
-        //private Desire _desire;
         private Intentions _intentions;
         private Capteurs _capteurs;
         private Effecteurs _effecteur;
-        private Dictionary<String, int> _valeur;
         private SearchStrategy _strategy;
         public static Agent instance = null;
 
@@ -27,14 +25,9 @@ namespace TP1_IA.model
         {
             _coordonnees = c;
             _score = 0;
-            //_desire = new Desire();
             _intentions = new Intentions();
             _capteurs = new Capteurs();
             _effecteur = new Effecteurs();
-            _valeur = new Dictionary<string, int>();
-            _valeur.Add("deplacement", -1);
-            _valeur.Add("poussiere", 10);
-            _valeur.Add("bijou", 15);
             _strategy = strategy;
             _belief = new Belief();
         }
@@ -45,7 +38,6 @@ namespace TP1_IA.model
         }
 
         
-
         public EnumIA.Action move()
         {
             return _intentions.depile();
@@ -136,12 +128,6 @@ namespace TP1_IA.model
        {
            get => _effecteur;
            set => _effecteur = value;
-       }
-
-       public Dictionary<string, int> Valeur
-       {
-           get => _valeur;
-           set => _valeur = value;
        }
 
        public SearchStrategy Strategy

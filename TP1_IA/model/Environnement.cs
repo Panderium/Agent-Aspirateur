@@ -58,7 +58,7 @@ namespace TP1_IA.model
                 }
 
                 Program.updateUI();
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(400);
                 
             }
         }
